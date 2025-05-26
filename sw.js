@@ -5,9 +5,7 @@ const urlsToCache = [
   './manifest.json',
   './sw.js',
   './estilos.css',     // si tienes CSS
-  './app.js',           // si tienes JS
-  './icon-192.png',
-  './icon-512.png'
+  './app.js'           // si tienes JS
 ];
 
 // Instalar y cachear
