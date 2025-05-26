@@ -1,12 +1,14 @@
 const CACHE_NAME = 'mi-app-cache-v1';
-cache.addAll([
-  '/index.html',
-  '/style.css',
-  '/sw.js',
-  '/script.js',
-  '/manifest.json',
-  '/favicon.ico' // ← este probablemente da error
-]);
+const urlsToCache = [
+  './',
+  './index.html',
+  './manifest.json',
+  './sw.js',
+  './estilos.css',     // si tienes CSS
+  './app.js',           // si tienes JS
+  './icon-192.png',
+  './icon-512.png'
+];
 
 // Instalar y cachear
 self.addEventListener('install', event => {
