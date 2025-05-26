@@ -4,11 +4,8 @@ const urlsToCache = [
   './index.html',
   './manifest.json',
   './sw.js'
-//  './estilos.css',     // si tienes CSS
- // './app.js',           // si tienes JS
- // './icon-192.png',
- // './icon-512.png'
 ];
+
 
 // Instalar y cachear
 self.addEventListener('install', event => {
