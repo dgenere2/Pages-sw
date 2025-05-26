@@ -2,6 +2,7 @@ const CACHE_NAME = 'mi-app-cache-v1';
 cache.addAll([
   '/index.html',
   '/style.css',
+  '/sw.js',
   '/script.js',
   '/manifest.json',
   '/favicon.ico' // ← este probablemente da error
