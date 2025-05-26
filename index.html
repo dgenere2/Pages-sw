@@ -277,9 +277,9 @@ main {
 </div>
 
 <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('https://dgenere2.github.io/Pages-sw//sw.js')
-          .then(reg => {
+ if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => {
         console.log('Service Worker registrado con éxito:', reg);
       })
       .catch(err => {
