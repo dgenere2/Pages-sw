@@ -1,3 +1,338 @@
-<h1>
-Hola
-</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi App Móvil</title>
+<link rel="manifest" href="?manifest" /> 
+  <style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  font-size: 18px;
+}
+
+.app-bar {
+  background: #004aad;
+  color: white;
+  padding: 1.2rem 1.5rem; /* Aumentado para más espacio */
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1001;
+}
+
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 4.4rem; /* Antes 2rem */
+  color: white;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 2.5rem; /* Antes 1.6rem */
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -400px;
+  width: 400px;
+  height: 100%;
+  background: #0066cc;
+  padding-top: 70px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+#sidebar ul {
+  list-style: none;
+}
+
+#sidebar ul li a {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  font-size: 2.5rem;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+#sidebar ul li a span {
+  margin-right: 10px;
+  font-size: 1.4rem;
+}
+
+#sidebar ul li a:hover {
+  background: #005bb5;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 900;
+}
+
+main {
+  margin-top: 70px;
+  padding: 1rem;
+}
+
+.content {
+  margin: 8% 0% 0% 0%;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#sidebar.active {
+  left: 0;
+}
+
+#overlay.active {
+  display: block;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.formulario label {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.2rem;
+}
+
+.formulario input[type="text"],
+.formulario input[type="date"],
+.formulario input[type="number"],
+.formulario textarea,
+.formulario select {
+  padding: 0.8rem 1rem;
+  font-size: 2.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  font-family: inherit;
+}
+
+.formulario textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formulario button {
+  background-color: #004aad;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 2.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+
+.formulario button:hover {
+  background-color: #003080;
+}
+
+/* Recibo */
+.recibo {
+  font-family: monospace;
+  border: 1px dashed #999;
+  padding: 1rem;
+  background: #fff;
+  max-width: 400px;
+  margin: 1rem auto;
+  font-size: 1.8rem;
+}
+
+.recibo h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.recibo p {
+  margin: 4px 0;
+}
+
+.recibo hr {
+  margin: 10px 0;
+}
+
+/* Botón de impresión */
+.btn-imprimir {
+  width: 100%;
+  padding: 1rem;
+  font-size: 2.5rem;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+/* Optimización para imprimir */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #recibo, #recibo * {
+    visibility: visible;
+  }
+
+  #recibo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+  }
+}
+
+
+
+
+  </style>
+</head>
+<body>
+  <header class="app-bar">
+    <button id="menu-toggle" class="menu-btn">&#9776;</button>
+    <h1 class="title">Mi App</h1>
+  </header>
+
+  <nav id="sidebar">
+    <ul>
+      <li><a href="#"><span>🏠</span> Inicio</a></li>
+      <li><a href="#"><span>📄</span> Servicios</a></li>
+      <li><a href="#"><span>ℹ️</span> Acerca de</a></li>
+      <li><a href="#"><span>✉️</span> Contacto</a></li>
+    </ul>
+  </nav>
+
+  <div id="overlay"></div>
+
+  <main>
+    <section class="content">
+      <h2>Bienvenido</h2>
+      <p>Esta es una app con menú estilo móvil cómodo.</p>
+    </section>
+  </main>
+
+  <!-- FORMULARIO -->
+<form id="formulario" class="formulario">
+  <label for="cliente">Cliente</label>
+  <input type="text" id="cliente" required />
+
+  <label for="fecha">Fecha</label>
+  <input type="date" id="fecha" required />
+
+  <label for="servicio">Servicio</label>
+  <input type="text" id="servicio" required />
+
+  <label for="monto">Monto (RD$)</label>
+  <input type="number" id="monto" step="0.01" required />
+
+  <button type="submit">Generar Recibo</button>
+</form>
+
+<!-- RECIBO -->
+<div id="recibo" class="recibo" style="display:none;">
+  <h2>Recibo de Pago</h2>
+  <p><strong>Cliente:</strong> <span id="r-cliente"></span></p>
+  <p><strong>Fecha:</strong> <span id="r-fecha"></span></p>
+  <p><strong>Servicio:</strong> <span id="r-servicio"></span></p>
+  <p><strong>Monto:</strong> RD$ <span id="r-monto"></span></p>
+  <hr />
+  <p>Gracias por su preferencia.</p>
+  <button class="btn-imprimir" onclick="imprimirRecibo()">🖨️ Imprimir</button>
+</div>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('https://dgenere2.github.io/Pages-sw//sw.js')
+          .then(reg => {
+        console.log('Service Worker registrado con éxito:', reg);
+      })
+      .catch(err => {
+        console.error('Error al registrar el Service Worker:', err);
+      });
+  }
+
+  // Menú lateral
+  document.getElementById('menu-toggle').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('active');
+    document.getElementById('overlay').classList.toggle('active');
+  });
+
+  document.getElementById('overlay').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+  });
+
+  // Procesar formulario
+  document.getElementById("formulario").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const cliente = document.getElementById("cliente").value;
+    const fecha = document.getElementById("fecha").value;
+    const servicio = document.getElementById("servicio").value;
+    const monto = document.getElementById("monto").value;
+
+    document.getElementById("r-cliente").textContent = cliente;
+    document.getElementById("r-fecha").textContent = fecha;
+    document.getElementById("r-servicio").textContent = servicio;
+    document.getElementById("r-monto").textContent = parseFloat(monto).toFixed(2);
+
+    document.getElementById("recibo").style.display = "block";
+  });
+
+  // Función de impresión
+  function imprimirRecibo() {
+    const contenido = document.getElementById("recibo").innerHTML;
+    const ventana = window.open('', '', 'width=400,height=600');
+    ventana.document.write('<html><head><title>Recibo</title><style>');
+    ventana.document.write(`
+      body { font-family: monospace; padding: 10px; font-size: 14px; }
+      h2 { text-align: center; }
+      p { margin: 4px 0; }
+      hr { margin: 10px 0; }
+    `);
+    ventana.document.write('</style></head><body>');
+    ventana.document.write(contenido);
+    ventana.document.write('</body></html>');
+    ventana.document.close();
+    ventana.print();
+  }
+</script>
+  
+</body>
+</html>
