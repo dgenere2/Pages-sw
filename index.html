@@ -507,6 +507,25 @@ function guardarEnLocal(factura) {
     ventana.print();
   }
 </script>
+
+  <script>
+window.addEventListener("online", function () {
+  const pendientes = JSON.parse(localStorage.getItem("facturas_pendientes")) || [];
+
+  if (pendientes.length > 0) {
+    pendientes.forEach(async (factura, index) => {
+      try {
+        await enviarFacturaAScript(factura);
+        pendientes.splice(index, 1); // Eliminar la que ya se envió
+        localStorage.setItem("facturas_pendientes", JSON.stringify(pendientes));
+      } catch (err) {
+        console.warn("No se pudo sincronizar una factura:", err);
+      }
+    });
+  }
+});
+</script>
+
   
 </body>
 </html>
