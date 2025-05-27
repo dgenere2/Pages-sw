@@ -27,12 +27,24 @@ body {
   color: white;
   padding: 1.2rem 1.5rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1001;
-  gap: 1rem; /* Espacio entre elementos */
+}
+
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.right-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .menu-btn {
@@ -47,13 +59,6 @@ body {
   margin: 0;
   font-size: 1.5rem;
   font-weight: bold;
-}
-
-#boton-login, #resultado, #logout {
-  margin-left: auto; /* Empuja estos elementos al extremo derecho */
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 #logout {
@@ -74,7 +79,6 @@ body {
   color: white;
   font-size: 0.9rem;
 }
-
 
 
 
@@ -271,12 +275,17 @@ main {
 </head>
 <body>
 <header class="app-bar">
-  <button id="menu-toggle" class="menu-btn">&#9776;</button>
-  <h1 class="title">Mi App</h1>
-  <div id="boton-login"></div>
-  <div id="resultado"></div>
-  <button id="logout" style="display:none;">Cerrar sesión</button>
-</header>>
+  <div class="left-group">
+    <button id="menu-toggle" class="menu-btn">&#9776;</button>
+    <h1 class="title">Mi App</h1>
+  </div>
+
+  <div class="right-group">
+    <div id="boton-login"></div>
+    <div id="resultado"></div>
+    <button id="logout" style="display:none;">Cerrar sesión</button>
+  </div>
+</header>
 
 
 
