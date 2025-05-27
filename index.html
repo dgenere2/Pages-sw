@@ -230,6 +230,9 @@ main {
   <header class="app-bar">
     <button id="menu-toggle" class="menu-btn">&#9776;</button>
     <h1 class="title">Mi App</h1>
+    <div id="boton-login"></div>
+<div id="resultado"></div>
+<button id="logout" style="display:none;">Cerrar sesión</button>
   </header>
 
   <nav id="sidebar">
@@ -285,9 +288,7 @@ main {
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <div class="g_id_signin" data-type="standard"></div>
   
-<div id="boton-login"></div>
-<div id="resultado"></div>
-<button id="logout" style="display:none;">Cerrar sesión</button>
+
 
 <script>
   function handleCredentialResponse(response) {
