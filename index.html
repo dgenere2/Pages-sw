@@ -482,10 +482,13 @@ async function enviarFacturaAScript(factura) {
   const res = fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain"
       },
-      body: JSON.stringify({ factura })
+      body: JSON.stringify({ id_token }),
+      redirect: "follow"
     })
+
+  
 
   if (!res.ok) throw new Error("Error en respuesta del servidor" + res );
 }
