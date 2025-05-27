@@ -485,7 +485,7 @@ async function enviarFacturaAScript(factura) {
       redirect: "follow"
     })
 
-  if (!res.ok) throw new Error("Error en respuesta del servidor",res );
+  if (!res.ok) throw new Error("Error en respuesta del servidor" + res );
 }
 
 // Guardar en localStorage
