@@ -1,6 +1,6 @@
 {
-  "name": "Mi App Web",
-  "short_name": "AppWeb",
+  "name": "Report@ Agro",
+  "short_name": "Agro",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
