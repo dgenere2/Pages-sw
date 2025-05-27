@@ -362,7 +362,6 @@ main {
       if (data.status === "success") {
         localStorage.setItem("userEmail", data.email);
         localStorage.setItem("id_token", id_token);
-        console.log(id_token)
         document.getElementById("resultado").textContent = data.email;
         document.getElementById("logout").style.display = "inline-block";
         document.getElementById("boton-login").innerHTML = ""; // Oculta login
