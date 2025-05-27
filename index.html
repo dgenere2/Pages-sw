@@ -484,7 +484,7 @@ async function enviarFacturaAScript(factura) {
       headers: {
         "Content-Type": "text/plain"
       },
-      body: JSON.stringify({ id_token }),
+      body: JSON.stringify({ factura }),
       redirect: "follow"
     })
 
