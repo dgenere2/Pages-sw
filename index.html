@@ -481,8 +481,7 @@ async function enviarFacturaAScript(factura) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ factura }),
-      redirect: "follow"
+      body: JSON.stringify({ factura })
     })
 
   if (!res.ok) throw new Error("Error en respuesta del servidor" + res );
