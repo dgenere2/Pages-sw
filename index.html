@@ -475,6 +475,9 @@ document.getElementById("formulario").addEventListener("submit", async function 
 
 // Enviar a Apps Script
 async function enviarFacturaAScript(factura) {
+
+  console.log(factura)
+  
   const url = "https://script.google.com/macros/s/AKfycbzDrqkdfYA9egr4esL2PGdXMIgMdl5ob6hGItBjzE1R9ydd0C1htdrtbI0zZmSxvLZl/exec"; // Reemplazar con tu URL del Web App de Apps Script
   const res = fetch(url, {
       method: "POST",
