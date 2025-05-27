@@ -26,14 +26,97 @@ body {
   background: #004aad;
   color: white;
   padding: 1.2rem 1.5rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* menú | título | login */
   align-items: center;
-  justify-content: space-between; /* Distribuye botones y título */
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1001;
 }
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+#logout {
+  background-color: white;
+  color: #004aad;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#logout:hover {
+  background-color: #e0e0e0;
+}
+
+#resultado {
+  color: white;
+  font-size: 0.9rem;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+#logout {
+  background-color: white;
+  color: #004aad;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#logout:hover {
+  background-color: #e0e0e0;
+}
+
+#resultado {
+  color: white;
+  font-size: 0.9rem;
+}
+   
 
 .menu-btn {
   background: none;
@@ -275,7 +358,7 @@ main {
   </style>
 </head>
 <body>
- <header class="app-bar">
+<header class="app-bar">
   <button id="menu-toggle" class="menu-btn">&#9776;</button>
   <h1 class="title">Mi App</h1>
   <div class="user-actions">
@@ -284,6 +367,7 @@ main {
     <button id="logout" style="display:none;">Cerrar sesión</button>
   </div>
 </header>
+
 
 
   <nav id="sidebar">
