@@ -446,6 +446,11 @@ document.getElementById("formulario").addEventListener("submit", async function 
     monto: parseFloat(document.getElementById("monto").value).toFixed(2)
   };
 
+   document.getElementById("cliente").value = ""
+   document.getElementById("fecha").value = ""
+   document.getElementById("servicio").value = ""
+   document.getElementById("monto").value  = ""
+
   // Mostrar recibo
   document.getElementById("r-cliente").textContent = factura.cliente;
   document.getElementById("r-fecha").textContent = factura.fecha;
