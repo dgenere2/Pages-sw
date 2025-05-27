@@ -289,22 +289,28 @@ main {
   function handleCredentialResponse(response) {
     const id_token = response.credential;
 
-    fetch(https://script.google.com/macros/library/d/1uWAT6Eg-45pGwv_WUCWggl_1kmGTqlSBzkqIAP6VRZNgZskqVI4681iZ/34", {
+    const URL = "https://script.google.com/macros/library/d/1uWAT6Eg-45pGwv_WUCWggl_1kmGTqlSBzkqIAP6VRZNgZskqVI4681iZ/34";
+    fetch(URL, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain"
       },
-      body: JSON.stringify({ id_token })
+      body: JSON.stringify({ id_token }),
+      redirect: "follow"
     })
     .then(res => res.text())
     .then(data => {
       document.getElementById("resultado").innerHTML = data;
+    })
+    .catch(err => {
+      console.error("Error en la autenticación:", err);
+      document.getElementById("resultado").innerHTML = "Ocurrió un error al autenticar.";
     });
   }
 
   window.onload = function () {
     google.accounts.id.initialize({
-      client_id: "197964323281-d8hr205c5urqml3f5csqduvii90eo0pu.apps.googleusercontent.com", // ← Aquí tu client_id
+      client_id: "197964323281-d8hr205c5urqml3f5csqduvii90eo0pu.apps.googleusercontent.com",
       callback: handleCredentialResponse
     });
     google.accounts.id.renderButton(
@@ -312,7 +318,8 @@ main {
       { theme: "outline", size: "large" }
     );
   };
-</script>  
+</script>
+
 
 <script>
  if ('serviceWorker' in navigator) {
