@@ -429,22 +429,65 @@ main {
     document.getElementById('overlay').classList.remove('active');
   });
 
-  // Procesar formulario
-  document.getElementById("formulario").addEventListener("submit", function (e) {
-    e.preventDefault();
+</script>
 
-    const cliente = document.getElementById("cliente").value;
-    const fecha = document.getElementById("fecha").value;
-    const servicio = document.getElementById("servicio").value;
-    const monto = document.getElementById("monto").value;
+  
+ <script>
 
-    document.getElementById("r-cliente").textContent = cliente;
-    document.getElementById("r-fecha").textContent = fecha;
-    document.getElementById("r-servicio").textContent = servicio;
-    document.getElementById("r-monto").textContent = parseFloat(monto).toFixed(2);
+   // Procesar formulario
+document.getElementById("formulario").addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    document.getElementById("recibo").style.display = "block";
+  const factura = {
+    cliente: document.getElementById("cliente").value,
+    fecha: document.getElementById("fecha").value,
+    servicio: document.getElementById("servicio").value,
+    monto: parseFloat(document.getElementById("monto").value).toFixed(2)
+  };
+
+  // Mostrar recibo
+  document.getElementById("r-cliente").textContent = factura.cliente;
+  document.getElementById("r-fecha").textContent = factura.fecha;
+  document.getElementById("r-servicio").textContent = factura.servicio;
+  document.getElementById("r-monto").textContent = factura.monto;
+  document.getElementById("recibo").style.display = "block";
+
+  // Guardar en línea o local
+  if (navigator.onLine) {
+    try {
+      await enviarFacturaAScript(factura);
+    } catch (err) {
+      console.warn("Error al enviar online, guardando en localStorage:", err);
+      guardarEnLocal(factura);
+    }
+  } else {
+    guardarEnLocal(factura);
+  }
+});
+
+// Enviar a Apps Script
+async function enviarFacturaAScript(factura) {
+  const url = "TU_URL_WEB_APP"; // Reemplazar con tu URL del Web App de Apps Script
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(factura)
   });
+
+  if (!res.ok) throw new Error("Error en respuesta del servidor");
+}
+
+// Guardar en localStorage
+function guardarEnLocal(factura) {
+  const pendientes = JSON.parse(localStorage.getItem("facturas_pendientes")) || [];
+  pendientes.push(factura);
+  localStorage.setItem("facturas_pendientes", JSON.stringify(pendientes));
+}
+</script>
+
+  <script>
 
   // Función de impresión
   function imprimirRecibo() {
