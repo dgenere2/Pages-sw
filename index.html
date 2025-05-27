@@ -347,8 +347,8 @@ main {
 <script>
   function handleCredentialResponse(response) {
     const id_token = response.credential;
-    const URL = "https://script.google.com/macros/s/AKfycby-pxRLDBzdIvwzNSnKzo_UJDhCBHr5oWCgkVI6yb4GC3tZNKArhfTuggIIuSWRv4CZ6Q/exec";
 
+    const URL = "https://script.google.com/macros/s/AKfycby-pxRLDBzdIvwzNSnKzo_UJDhCBHr5oWCgkVI6yb4GC3tZNKArhfTuggIIuSWRv4CZ6Q/exec";
     fetch(URL, {
       method: "POST",
       headers: {
@@ -360,46 +360,48 @@ main {
     .then(res => res.json())
     .then(data => {
       if (data.status === "success") {
-        localStorage.setItem("email", data.email); // Guardar sesión
-        mostrarUsuario(data.email);
+        localStorage.setItem("userEmail", data.email);
+        document.getElementById("resultado").textContent = data.email;
+        document.getElementById("logout").style.display = "inline-block";
+        document.getElementById("boton-login").innerHTML = ""; // Oculta login
       } else {
-        document.getElementById("resultado").innerText = "Error de autenticación.";
+        console.error("Error de autenticación");
       }
     })
     .catch(error => {
-      document.getElementById("resultado").innerText = "Error al conectar.";
+      console.error("Error en la autenticación:", error);
     });
   }
 
-  function mostrarUsuario(email) {
-    document.getElementById("resultado").innerHTML = "Bienvenido, " + email;
-    document.getElementById("boton-login").style.display = "none";
-    document.getElementById("logout").style.display = "inline-block";
-  }
-
-  function cerrarSesion() {
-    localStorage.removeItem("email");
-    location.reload();
+  function iniciarGoogleLogin() {
+    google.accounts.id.initialize({
+      client_id: "197964323281-d8hr205c5urqml3f5csqduvii90eo0pu.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("boton-login"),
+      { theme: "outline", size: "large" }
+    );
   }
 
   window.onload = function () {
-    const emailGuardado = localStorage.getItem("email");
+    const emailGuardado = localStorage.getItem("userEmail");
     if (emailGuardado) {
-      mostrarUsuario(emailGuardado);
+      document.getElementById("resultado").textContent = emailGuardado;
+      document.getElementById("logout").style.display = "inline-block";
     } else {
-      google.accounts.id.initialize({
-        client_id: "197964323281-d8hr205c5urqml3f5csqduvii90eo0pu.apps.googleusercontent.com",
-        callback: handleCredentialResponse
-      });
-      google.accounts.id.renderButton(
-        document.getElementById("boton-login"),
-        { theme: "outline", size: "large" }
-      );
+      iniciarGoogleLogin();
     }
 
-    document.getElementById("logout").addEventListener("click", cerrarSesion);
+    document.getElementById("logout").addEventListener("click", function () {
+      localStorage.removeItem("userEmail");
+      document.getElementById("resultado").textContent = "";
+      document.getElementById("logout").style.display = "none";
+      iniciarGoogleLogin(); // Vuelve a mostrar botón de login
+    });
   };
 </script>
+
 
 
 
