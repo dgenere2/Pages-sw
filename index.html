@@ -432,19 +432,9 @@ main {
 </script>
 
   
- <script>
-
-   // Procesar formulario
+<script>
 document.getElementById("formulario").addEventListener("submit", async function (e) {
   e.preventDefault();
-
- // const id_token = localStorage.getItem("id_token");
-
-//  if (!id_token) {
-//    alert('Debe iniciar sesión');
-//    return;
-//  }
-
 
   const factura = {
     cliente: document.getElementById("cliente").value,
@@ -475,22 +465,16 @@ document.getElementById("formulario").addEventListener("submit", async function 
 
 // Enviar a Apps Script
 async function enviarFacturaAScript(factura) {
-
-  console.log(factura)
-  
   const url = "https://script.google.com/macros/s/AKfycbzDrqkdfYA9egr4esL2PGdXMIgMdl5ob6hGItBjzE1R9ydd0C1htdrtbI0zZmSxvLZl/exec"; // Reemplazar con tu URL del Web App de Apps Script
-  const res = fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain"
-      },
-      body: JSON.stringify({ factura }),
-      redirect: "follow"
-    })
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(factura)
+  });
 
-  
-
-  if (!res.ok) throw new Error("Error en respuesta del servidor" + res );
+  if (!res.ok) throw new Error("Error en respuesta del servidor");
 }
 
 // Guardar en localStorage
@@ -500,6 +484,7 @@ function guardarEnLocal(factura) {
   localStorage.setItem("facturas_pendientes", JSON.stringify(pendientes));
 }
 </script>
+
 
   <script>
 
