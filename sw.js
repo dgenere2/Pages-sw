@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mi-app-cache-v1';
+const CACHE_NAME = 'mi-app-cache-v1.1';
 const urlsToCache = [
   './',
   './index.html',
