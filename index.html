@@ -436,6 +436,12 @@ main {
 document.getElementById("formulario").addEventListener("submit", async function (e) {
   e.preventDefault();
 
+  const id_token = localStorage.getItem("id_token");
+  if (!id_token) {
+    alert("Debe iniciar sesión para guardar la factura.");
+    return;
+  }
+
   const factura = {
     cliente: document.getElementById("cliente").value,
     fecha: document.getElementById("fecha").value,
