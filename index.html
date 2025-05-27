@@ -528,7 +528,7 @@ window.addEventListener("online", function () {
         pendientes.splice(index, 1); // Eliminar la que ya se envió
         localStorage.setItem("facturas_pendientes", JSON.stringify(pendientes));
       } catch (err) {
-        console.warn("No se pudo sincronizar una factura:", err);
+        console.warn("No se pudo sincronizar una factura:" + err);
       }
     });
   }
