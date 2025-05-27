@@ -25,14 +25,62 @@ body {
 .app-bar {
   background: #004aad;
   color: white;
-  padding: 1.2rem 1.5rem; /* Aumentado para más espacio */
+  padding: 1.2rem 1.5rem;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Distribuye botones y título */
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1001;
 }
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.title {
+  flex: 1;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#boton-login {
+  display: flex;
+  align-items: center;
+}
+
+#logout {
+  background-color: white;
+  color: #004aad;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#logout:hover {
+  background-color: #e0e0e0;
+}
+
+#resultado {
+  color: white;
+  font-size: 0.9rem;
+}
+
 
 
 .menu-btn {
@@ -227,13 +275,16 @@ main {
   </style>
 </head>
 <body>
-  <header class="app-bar">
-    <button id="menu-toggle" class="menu-btn">&#9776;</button>
-    <h1 class="title">Mi App</h1>
+ <header class="app-bar">
+  <button id="menu-toggle" class="menu-btn">&#9776;</button>
+  <h1 class="title">Mi App</h1>
+  <div class="user-actions">
     <div id="boton-login"></div>
-<div id="resultado"></div>
-<button id="logout" style="display:none;">Cerrar sesión</button>
-  </header>
+    <div id="resultado"></div>
+    <button id="logout" style="display:none;">Cerrar sesión</button>
+  </div>
+</header>
+
 
   <nav id="sidebar">
     <ul>
