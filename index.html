@@ -468,13 +468,14 @@ document.getElementById("formulario").addEventListener("submit", async function 
 // Enviar a Apps Script
 async function enviarFacturaAScript(factura) {
   const url = "https://script.google.com/macros/s/AKfycbwLXT3OMlRBowr0m7gX3G2Qm5uuVV_g9qnwkLzJR1lEts0WU47P9eWdwEFzKpXzTovD/exec"; // Reemplazar con tu URL del Web App de Apps Script
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "text/plain"
-    },
-    body: JSON.stringify(factura)
-  });
+  const res = fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain"
+      },
+      body: JSON.stringify({ factura }),
+      redirect: "follow"
+    })
 
   if (!res.ok) throw new Error("Error en respuesta del servidor");
 }
