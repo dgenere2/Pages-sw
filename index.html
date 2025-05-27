@@ -479,7 +479,7 @@ async function enviarFacturaAScript(factura) {
   const res = fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "text/plain"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({ factura }),
       redirect: "follow"
