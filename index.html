@@ -313,6 +313,9 @@ main {
   <label for="fecha">Fecha</label>
   <input type="date" id="fecha" required />
 
+   <label for="peso">Cantidad de Kilos Gramos (KG)</label>
+  <input type="number" id="peso" step="0.01" required />
+
   <label for="servicio">Servicio</label>
   <input type="text" id="servicio" required />
 
@@ -435,6 +438,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
   e.preventDefault();
 
   const id_token = localStorage.getItem("id_token");
+  const emailGuardado = localStorage.getItem("userEmail");
   if (!id_token) {
     alert("Debe iniciar sesión para guardar la factura.");
     return;
@@ -444,13 +448,17 @@ document.getElementById("formulario").addEventListener("submit", async function 
     cliente: document.getElementById("cliente").value,
     fecha: document.getElementById("fecha").value,
     servicio: document.getElementById("servicio").value,
-    monto: parseFloat(document.getElementById("monto").value).toFixed(2)
+    monto: parseFloat(document.getElementById("monto").value).toFixed(2),
+    peso: parseFloat(document.getElementById("peso").value).toFixed(2),
+    usuario: emailGuardado,
+    token: id_token
   };
 
    document.getElementById("cliente").value = ""
    document.getElementById("fecha").value = ""
    document.getElementById("servicio").value = ""
    document.getElementById("monto").value  = ""
+  document.getElementById("peso").value  = ""
 
   // Mostrar recibo
   document.getElementById("r-cliente").textContent = factura.cliente;
