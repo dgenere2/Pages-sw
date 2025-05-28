@@ -378,7 +378,10 @@ main {
     });
     google.accounts.id.renderButton(
       document.getElementById("boton-login"),
-      { theme: "outline", size: "large" }
+      { theme: "outline", // o "filled_blue"
+      size: "large",    // o "medium", "small"
+      text: "signin",   // o "signup_with", "continue_with"
+      shape: "pill"     // o "rectangular", "circle" }
     );
   }
 
