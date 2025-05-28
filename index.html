@@ -489,6 +489,12 @@ document.getElementById("formulario").addEventListener("submit", async function 
 
 });
 
+      function getIdDinamico() {
+  return new Date().getTime() + '-' + (Math.floor(Math.random() * 100) + 1);
+
+}   
+  
+
 // Enviar a Apps Script
 async function enviarFacturaAScript(factura) {
   const url = "https://script.google.com/macros/s/AKfycbzDrqkdfYA9egr4esL2PGdXMIgMdl5ob6hGItBjzE1R9ydd0C1htdrtbI0zZmSxvLZl/exec"; // Reemplazar con tu URL del Web App de Apps Script
@@ -553,9 +559,6 @@ window.addEventListener("online", function () {
   }
 });
 
-function getIdDinamico() {
-  return new Date().getTime() + '-' + (Math.floor(Math.random() * 100) + 1);
-}    
     
 </script>
 
