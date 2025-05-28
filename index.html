@@ -442,11 +442,13 @@ document.getElementById("formulario").addEventListener("submit", async function 
 
   const id_token = localStorage.getItem("id_token");
   const emailGuardado = localStorage.getItem("userEmail");
-  var noFactura = getIdDinamico()
+  var noFactura = getIdDinamico();
   if (!id_token) {
     alert("Debe iniciar sesión para guardar la factura.");
     return;
   }
+
+  console.log("Factura ID:", noFactura);
 
   const factura = {
     cliente: document.getElementById("cliente").value,
