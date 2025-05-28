@@ -442,6 +442,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
 
   const id_token = localStorage.getItem("id_token");
   const emailGuardado = localStorage.getItem("userEmail");
+  var noFactura = getIdDinamico()
   if (!id_token) {
     alert("Debe iniciar sesión para guardar la factura.");
     return;
@@ -455,7 +456,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
     peso: parseFloat(document.getElementById("peso").value).toFixed(2),
     usuario: emailGuardado,
     token: id_token,
-    noFactura: getIdDinamico()
+    nofactura: noFactura
   };
 
    document.getElementById("cliente").value = ""
@@ -471,7 +472,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
   document.getElementById("r-monto").textContent = factura.monto;
   document.getElementById("recibo").style.display = "block";
   document.getElementById("r-peso").textContent =  factura.peso 
-  document.getElementById("r-factura").textContent = noFactura
+  document.getElementById("r-factura").textContent = nofactura
 
   // Guardar en línea o local
  if (navigator.onLine) {
