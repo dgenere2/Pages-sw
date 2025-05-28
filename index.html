@@ -316,7 +316,7 @@ main {
    <label for="peso">Cantidad de Kilos Gramos (KG)</label>
   <input type="number" id="peso" step="0.01" required />
 
-  <label for="servicio">Servicio</label>
+  <label for="servicio">Concepto</label>
   <input type="text" id="servicio" required />
 
   <label for="monto">Monto (RD$)</label>
@@ -333,7 +333,8 @@ main {
   <h2>Recibo de Pago</h2>
   <p><strong>Cliente:</strong> <span id="r-cliente"></span></p>
   <p><strong>Fecha:</strong> <span id="r-fecha"></span></p>
-  <p><strong>Servicio:</strong> <span id="r-servicio"></span></p>
+  <p><strong>Cant KG:</strong> <span id="r-peso"></span></p>
+  <p><strong>Concepto:</strong> <span id="r-servicio"></span></p>
   <p><strong>Monto:</strong> RD$ <span id="r-monto"></span></p>
   <hr />
   <p>Gracias por su preferencia.</p>
@@ -466,6 +467,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
   document.getElementById("r-servicio").textContent = factura.servicio;
   document.getElementById("r-monto").textContent = factura.monto;
   document.getElementById("recibo").style.display = "block";
+  document.getElementById("r-peso").textContent =  factura.peso 
 
   // Guardar en línea o local
  if (navigator.onLine) {
