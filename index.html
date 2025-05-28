@@ -460,16 +460,18 @@ document.getElementById("formulario").addEventListener("submit", async function 
   document.getElementById("recibo").style.display = "block";
 
   // Guardar en línea o local
-  if (navigator.onLine) {
-    try {
-      await enviarFacturaAScript(factura);
-    } catch (err) {
-      console.warn("Error al enviar online, guardando en localStorage:", err);
-      guardarEnLocal(factura);
-    }
-  } else {
-    guardarEnLocal(factura);
+ if (navigator.onLine) {
+  try {
+    const respuesta = await enviarFacturaAScript(factura);
+    if (!respuesta.ok) throw new Error("Error en servidor"); // si no fue exitoso, lanza error
+  } catch (err) {
+    console.warn("Error al enviar online, guardando en localStorage:", err);
+    guardarEnLocal(factura); // solo se guarda si realmente falló
   }
+} else {
+  guardarEnLocal(factura);
+}
+
 });
 
 // Enviar a Apps Script
@@ -485,6 +487,8 @@ async function enviarFacturaAScript(factura) {
   });
 
   if (!res.ok) throw new Error("Error en respuesta del servidor");
+
+  return res;
 }
 
 // Guardar en localStorage
