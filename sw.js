@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mi-app-cache-v1.2'; // <--- Aumenta esto en cada cambio
+const CACHE_NAME = 'mi-app-cache-v1.3'; // <--- Aumenta esto en cada cambio
 const urlsToCache = [
   './',
   './index.html',
