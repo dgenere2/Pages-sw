@@ -1,6 +1,6 @@
 {
   "name": "Report@ Agro",
-  "short_name": "Report@App",
+  "short_name": "Report@ Agro",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
