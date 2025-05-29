@@ -296,6 +296,11 @@ main {
     </ul>
   </nav>
 
+ <div id="update-alert" style="display:none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); z-index: 9999;">
+  Nueva versión disponible. <button onclick="window.location.reload()" style="margin-left:10px; background:#4CAF50; color:white; border:none; padding:5px 10px; border-radius:4px;">Actualizar</button>
+</div>
+  
   <div id="overlay"></div>
 
   <main>
@@ -411,14 +416,22 @@ main {
 
 
 <script>
- if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => {
-        console.log('Service Worker registrado con éxito:', reg);
-      })
-      .catch(err => {
-        console.error('Error al registrar el Service Worker:', err);
-      });
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      console.log('✅ SW registrado:', reg);
+
+      reg.onupdatefound = () => {
+        const newWorker = reg.installing;
+        newWorker.onstatechange = () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            // Mostrar aviso
+            document.getElementById('update-alert').style.display = 'block';
+          }
+        };
+      };
+    }).catch(err => {
+      console.error('❌ Error al registrar SW:', err);
+    });
   }
 
   // Menú lateral
