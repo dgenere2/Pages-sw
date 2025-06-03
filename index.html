@@ -344,14 +344,14 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
     <option>Quintal</option>
   </select>
 
-  <label for="monto">Precio unitario</label>
+  <label for="unitario">Precio unitario</label>
   <input oninput = "calcularMonto()" type="number" id="unitario" step="0.01" required />
 
   <label for="servicio">Concepto</label>
   <input type="text" id="servicio" required />
 
   <label for="monto">Monto (RD$)</label>
-  <input type="number" id="monto" step="0.01" required />
+  <input unread type="number" id="monto" step="0.01" required />
 
   <button type="submit">Generar Recibo</button>
 </form>
