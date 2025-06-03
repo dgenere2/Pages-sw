@@ -507,7 +507,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
   document.getElementById("recibo").style.display = "block";
   document.getElementById("r-peso").textContent =  factura.peso 
   document.getElementById("r-factura").textContent =  factura.nofactura
-   document.getElementById("r-medida").textContent = factura.medida
+   document.getElementById("r-medida").textContent = " " + factura.medida
 
   // Guardar en línea o local
  if (navigator.onLine) {
