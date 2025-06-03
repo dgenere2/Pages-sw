@@ -337,14 +337,15 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
   <input type="date" id="fecha" required />
 
    <label for="peso">Peso</label>
-  <input type="number" id="peso" step="0.01" required />
+  <input  oninput = "calcularMonto()" type="number" id="peso" step="0.01" required />
   <select id="medida">
     <option>Libras</option>
     <option>Kilogramos</option>
+    <option>Quintal</option>
   </select>
 
   <label for="monto">Precio unitario</label>
-  <input type="number" id="unitario" step="0.01" required />
+  <input oninput = "calcularMonto()" type="number" id="unitario" step="0.01" required />
 
   <label for="servicio">Concepto</label>
   <input type="text" id="servicio" required />
@@ -441,6 +442,19 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
       iniciarGoogleLogin(); // Vuelve a mostrar botón de login
     });
   };
+
+  function calcularMonto() {
+   var cantidad = document.getElementById("peso").value
+     var pricioUnitario = document.getElementById("unitario").value
+    var montoTotal = pricioUnitario * cantidad
+
+    if (cantidad == "" || pricioUnitario == ""){ return}
+    
+    
+    document.getElementById("monto").value = montoTotal
+
+    }
+  
 </script>
 
 
