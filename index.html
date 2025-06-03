@@ -318,8 +318,12 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
   <label for="fecha">Fecha</label>
   <input type="date" id="fecha" required />
 
-   <label for="peso">Cantidad de Kilos Gramos (KG)</label>
+   <label for="peso">Peso</label>
   <input type="number" id="peso" step="0.01" required />
+  <select id="medida">
+    <option>Libras</option>
+    <option>Kilogramos</option>
+  </select>
 
   <label for="servicio">Concepto</label>
   <input type="text" id="servicio" required />
@@ -335,17 +339,19 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
 
 <!-- RECIBO -->
 <div id="recibo" class="recibo" style="display:none;">
-  <h2>Recibo de Pago</h2>
+  <h2 id="r-negocio"></h2>
+  <p id="r-descipcion"></p>
+  <h3 id="r-documento"></h3>
   <p><strong>No. recibo:</strong> <span id="r-factura"></span></p>
     <p><strong>Cliente:</strong> <span id="r-cliente"></span></p>
   <p><strong>Fecha:</strong> <span id="r-fecha"></span></p>
-  <p><strong>Cant KG:</strong> <span id="r-peso"></span></p>
+  <p><strong>Peso:</strong> <span id="r-peso"></span><span id="r-medida"></span></p>
   <p><strong>Concepto:</strong> <span id="r-servicio"></span></p>
   <p><strong>Monto:</strong> RD$ <span id="r-monto"></span></p>
   <hr />
   <p>Gracias por su preferencia.</p>
-  <button class="btn-imprimir" onclick="imprimirRecibo()">🖨️ Imprimir</button>
 </div>
+ <button class="btn-imprimir" onclick="imprimirRecibo()">🖨️ Imprimir</button> 
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <div class="g_id_signin" data-type="standard"></div>
@@ -370,6 +376,9 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
       if (data.status === "success") {
         localStorage.setItem("userEmail", data.email);
         localStorage.setItem("id_token", id_token);
+        document.getElementById("r-negocio").textContent = data.negocio
+        document.getElementById("r-descipcion").textContent = data.decripcion
+        document.getElementById("r-documento").textContent = data.documento
         document.getElementById("resultado").textContent = data.email;
         document.getElementById("logout").style.display = "inline-block";
         document.getElementById("boton-login").innerHTML = ""; // Oculta login
@@ -471,6 +480,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
     usuario: emailGuardado,
     token: id_token,
     nofactura: noFactura
+    medida: document.getElementById("medida").value
   };
 
    document.getElementById("cliente").value = ""
@@ -478,6 +488,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
    document.getElementById("servicio").value = ""
    document.getElementById("monto").value  = ""
   document.getElementById("peso").value  = ""
+
 
   // Mostrar recibo
   document.getElementById("r-cliente").textContent = factura.cliente;
@@ -487,6 +498,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
   document.getElementById("recibo").style.display = "block";
   document.getElementById("r-peso").textContent =  factura.peso 
   document.getElementById("r-factura").textContent =  factura.nofactura
+   document.getElementById("r-medida").textContent = factura.medida
 
   // Guardar en línea o local
  if (navigator.onLine) {
