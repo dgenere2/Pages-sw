@@ -368,6 +368,7 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
     <p><strong>Cliente:</strong> <span id="r-cliente"></span></p>
   <p><strong>Fecha:</strong> <span id="r-fecha"></span></p>
   <p><strong>Peso:</strong><span id="r-peso"></span><span id="r-medida"></span></p>
+  <p><strong>Concepto:</strong> <span id="r-punitario"></span></p>
   <p><strong>Concepto:</strong> <span id="r-servicio"></span></p>
   <p><strong>Monto:</strong> RD$ <span id="r-monto"></span></p>
   <hr />
@@ -516,7 +517,8 @@ document.getElementById("formulario").addEventListener("submit", async function 
     usuario: emailGuardado,
     token: id_token,
     nofactura: noFactura,
-    medida: document.getElementById("medida").value
+    medida: document.getElementById("medida").value,
+    preciounidad: document.getElementById("unitario").value 
   };
 
    document.getElementById("cliente").value = ""
@@ -535,6 +537,8 @@ document.getElementById("formulario").addEventListener("submit", async function 
   document.getElementById("r-peso").textContent =  factura.peso 
   document.getElementById("r-factura").textContent =  factura.nofactura
    document.getElementById("r-medida").textContent = " " + factura.medida
+   document.getElementById("r-punitario").textContent = factura.preciounidad
+  
 
   // Guardar en línea o local
  if (navigator.onLine) {
