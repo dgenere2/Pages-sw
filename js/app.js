@@ -228,4 +228,3 @@ window.addEventListener("online", function () {
     });
   }
 });
-}
