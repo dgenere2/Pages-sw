@@ -3,7 +3,9 @@ const urlsToCache = [
   './',
   './index.html',
   './manifest.json',
-  './sw.js'
+  './js/sw.js',
+  './js/app.js',
+  './css/estilos.css'
 ];
 
 // Instalar y cachear
