@@ -1,0 +1,275 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  font-size: 18px;
+}
+
+.app-bar {
+  background: #004aad;
+  color: white;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1001;
+}
+
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.right-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 3.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.title {
+  margin: 0;
+  font-size: 0.9em;
+  font-weight: bold;
+  font-family: 'Freestyle Script';      
+}
+
+#logout {
+  background-color: white;
+  color: #004aad;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#logout:hover {
+  background-color: #e0e0e0;
+}
+
+#resultado {
+  color: white;
+  font-size: 0.5rem;
+}
+
+
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 0.9rem; /* Antes 2rem */
+  color: white;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -200px;
+  width: 200px;
+  height: 100%;
+  background: #0066cc;
+  padding-top: 70px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+#sidebar ul {
+  list-style: none;
+}
+
+#sidebar ul li a {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  font-size: 0.9rem;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+#sidebar ul li a span {
+  margin-right: 10px;
+  font-size: 0.9rem;
+}
+
+#sidebar ul li a:hover {
+  background: #005bb5;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 900;
+}
+
+main {
+  margin-top: 3rem;
+  padding: 1rem;
+}
+
+.content {
+  margin: 1rem 0rem 0rem 0rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#sidebar.active {
+  left: 0;
+}
+
+#overlay.active {
+  display: block;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.formulario label {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.2rem;
+}
+
+.formulario input[type="text"],
+.formulario input[type="date"],
+.formulario input[type="number"],
+.formulario textarea,
+.formulario select {
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  font-family: inherit;
+}
+
+.formulario textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formulario button {
+  background-color: #004aad;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+
+.formulario button:hover {
+  background-color: #003080;
+}
+
+/* Recibo */
+.recibo {
+  font-family: monospace;
+  border: 1px dashed #999;
+  padding: 1rem;
+  background: #fff;
+  max-width: 400px;
+  margin: 1rem auto;
+  font-size: 1.8rem;
+}
+
+.recibo h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+ .recibo h3 {
+  text-align: center;
+  font-size: 1.9rem;
+  margin-bottom: 1rem;
+}  
+
+     .recibo h5 {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}  
+    
+
+.recibo p {
+  margin: 4px 0;
+}
+
+.recibo hr {
+  margin: 10px 0;
+}
+
+/* Botón de impresión */
+.btn-imprimir {
+  width: 100%;
+  padding: 1rem;
+  font-size: 0.9rem;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+/* Optimización para imprimir */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #recibo, #recibo * {
+    visibility: visible;
+  }
+
+  .btn-imprimir {
+      display: none !important;
+    }
+
+  #recibo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+  }
+}
+
+
