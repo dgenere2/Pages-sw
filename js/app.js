@@ -14,6 +14,7 @@
     .then(res => res.json())
     .then(data => {
       if (data.status === "success") {
+        var medias = data.medidas.split(',')
         localStorage.setItem("userEmail", data.email);
         localStorage.setItem("id_token", id_token);
         document.getElementById("r-negocio").textContent = data.negocio
@@ -22,6 +23,11 @@
         document.getElementById("resultado").textContent = data.email;
         document.getElementById("logout").style.display = "inline-block";
         document.getElementById("boton-login").innerHTML = ""; // Oculta login
+        for (i in medias){
+         document.getElementById("medida").add(new Option(medias[i], medias[i] ));
+          }
+
+          
       } else {
         console.error("Error de autenticación");
       }
