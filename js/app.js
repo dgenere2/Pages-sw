@@ -152,7 +152,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
   document.getElementById("r-factura").textContent =  factura.nofactura
    document.getElementById("r-medida").textContent = " " + factura.medida
    document.getElementById("r-punitario").textContent = factura.preciounidad
-   document.getElementById("r-label").textContent = "Precio por " + factura.nofactura
+   document.getElementById("r-label").textContent = "Precio por " + factura.medida
   
   
 
