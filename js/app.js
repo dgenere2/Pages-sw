@@ -74,7 +74,7 @@
   
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./js/sw.js').then(reg => {
+    navigator.serviceWorker.register('./sw.js').then(reg => {
       console.log('✅ SW registrado:', reg);
 
       reg.onupdatefound = () => {
