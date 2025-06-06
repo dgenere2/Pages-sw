@@ -14,6 +14,8 @@
     .then(res => res.json())
     .then(data => {
       if (data.status === "success") {
+        localStorage.removeItem("medida")
+        localStorage.setItem("medida",data.medidas)
         var medias = data.medidas.split(',')
         localStorage.setItem("userEmail", data.email);
         localStorage.setItem("id_token", id_token);
@@ -53,6 +55,26 @@
     if (emailGuardado) {
       document.getElementById("resultado").textContent = emailGuardado;
       document.getElementById("logout").style.display = "inline-block";
+      var datosMedidas = localStorage.getItem("medida")
+      var medias = datosMedidas.split(',')
+
+
+        for (i in medias){
+         document.getElementById("medida").add(new Option(medias[i], medias[i] ));
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+      
     } else {
       iniciarGoogleLogin();
     }
@@ -400,12 +422,6 @@ function limpiarFiltros() {
   renderizarFacturas(facturasCargadas); // Mostrar todo de nuevo
 }
 
-
-
-
  // Ejecutar al cargar
  consultarFacturas();
-
-
-
 
