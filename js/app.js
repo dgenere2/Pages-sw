@@ -252,43 +252,9 @@ document.getElementById(idMenu).style.display = ''
 
     document.getElementById('sidebar').classList.remove('active');
     document.getElementById('overlay').classList.remove('active');
+
+    consultarFacturas();
   
-}
-
-function filtrarTabla() {
-  const factura = document.getElementById('filtroFactura').value.toLowerCase();
-  const cliente = document.getElementById('filtroCliente').value.toLowerCase();
-  const fecha = document.getElementById('filtroFecha').value;
-  const servicio = document.getElementById('filtroServicio').value.toLowerCase();
-
-  const filas = document.querySelectorAll('#tablaFacturas tbody tr');
-  let total = 0;
-
-  filas.forEach(fila => {
-    const [colFactura, colCliente, colFecha, colServicio, colMonto] = fila.children;
-
-    const coincide =
-      colFactura.textContent.toLowerCase().includes(factura) &&
-      colCliente.textContent.toLowerCase().includes(cliente) &&
-      colFecha.textContent.includes(fecha) &&
-      colServicio.textContent.toLowerCase().includes(servicio);
-
-    fila.style.display = coincide ? '' : 'none';
-
-    if (coincide) {
-      total += parseFloat(colMonto.textContent.replace(/[^\d.-]/g, '')) || 0;
-    }
-  });
-
-  document.getElementById('totalMonto').textContent = `$${total.toFixed(2)}`;
-}
-
-function limpiarFiltros() {
-  document.getElementById('filtroFactura').value = '';
-  document.getElementById('filtroCliente').value = '';
-  document.getElementById('filtroFecha').value = '';
-  document.getElementById('filtroServicio').value = '';
-  filtrarTabla();
 }
 
 function exportarExcel() {
@@ -358,45 +324,87 @@ function exportarPDF() {
   doc.save('facturas.pdf');
 }
 
+let facturasCargadas = []; // Variable global para almacenar los datos
 
 async function consultarFacturas() {
-  const url = "https://script.google.com/macros/s/AKfycby3Ir5diIy3a--V100zZMFtINTHJncpDp3C_cbyafQ4IB1Z41jK-SpRbFmkfzj36CnK/exec"; // Reemplaza con tu URL
+  const url = "https://script.google.com/macros/s/AKfycby3Ir5diIy3a--V100zZMFtINTHJncpDp3C_cbyafQ4IB1Z41jK-SpRbFmkfzj36CnK/exec";
 
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-       "Content-Type": "text/plain"
-    },
-    body: JSON.stringify({ accion: "consultar" }),  // puedes enviar filtros si quieres
-    redirect: "follow"
-  });
-  
-
-  const json = await res.json();
-
-  if (json.facturas) {
-    const tbody = document.querySelector("tbody");
-    tbody.innerHTML = ""; // Limpiar
-
-    let total = 0;
-
-    json.facturas.forEach(f => {
-      const fila = document.createElement("tr");
-      fila.innerHTML = `
-        <td>${f.noFactura}</td>
-        <td>${f.cliente}</td>
-        <td>${f.fecha}</td>
-        <td>${f.servicio}</td>
-        <td>${parseFloat(f.monto).toFixed(2)}</td>
-      `;
-      tbody.appendChild(fila);
-      total += parseFloat(f.monto);
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify({ accion: "consultar" })
     });
 
-    document.getElementById("total-monto").textContent = total.toFixed(2);
+    const json = await res.json();
+    if (json.facturas) {
+      facturasCargadas = json.facturas; // Guardar facturas
+      renderizarFacturas(facturasCargadas); // Mostrar sin filtros al inicio
+    }
+
+  } catch (err) {
+    console.error("Error al consultar facturas:", err);
   }
 }
 
+function renderizarFacturas(facturas) {
+  const tbody = document.querySelector("#tablaFacturas tbody");
+  tbody.innerHTML = "";
+
+  let total = 0;
+  facturas.forEach(f => {
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${f.noFactura}</td>
+      <td>${f.cliente}</td>
+      <td>${f.fecha}</td>
+      <td>${f.servicio}</td>
+      <td>${parseFloat(f.monto).toFixed(2)}</td>
+    `;
+    tbody.appendChild(fila);
+    total += parseFloat(f.monto);
+  });
+
+  document.getElementById("total-monto").textContent = total.toFixed(2);
+}
+
+function filtrarTabla() {
+  const factura = document.getElementById('filtroFactura').value.toLowerCase();
+  const cliente = document.getElementById('filtroCliente').value.toLowerCase();
+  const fecha = document.getElementById('filtroFecha').value;
+  const servicio = document.getElementById('filtroServicio').value.toLowerCase();
+
+  const filtradas = facturasCargadas.filter(f => {
+    const noFactura = (f.noFactura || "").toString().toLowerCase();
+    const clienteF = (f.cliente || "").toString().toLowerCase();
+    const fechaF = (f.fecha || "").toString();
+    const servicioF = (f.servicio || "").toString().toLowerCase();
+
+    return (
+      noFactura.includes(factura) &&
+      clienteF.includes(cliente) &&
+      fechaF.includes(fecha) &&
+      servicioF.includes(servicio)
+    );
+  });
+
+  renderizarFacturas(filtradas);
+}
+
+
+function limpiarFiltros() {
+  document.getElementById('filtroFactura').value = '';
+  document.getElementById('filtroCliente').value = '';
+  document.getElementById('filtroFecha').value = '';
+  document.getElementById('filtroServicio').value = '';
+  renderizarFacturas(facturasCargadas); // Mostrar todo de nuevo
+}
+
+
+
+
+ // Ejecutar al cargar
+ consultarFacturas();
 
 
 
