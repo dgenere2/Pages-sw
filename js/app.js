@@ -52,6 +52,7 @@
 
   window.onload = function () {
     const emailGuardado = localStorage.getItem("userEmail");
+    localStorage.removeItem("ubicacion")
     if (emailGuardado) {
       document.getElementById("resultado").textContent = emailGuardado;
       document.getElementById("logout").style.display = "inline-block";
@@ -62,17 +63,6 @@
         for (i in medias){
          document.getElementById("medida").add(new Option(medias[i], medias[i] ));
           }
-
-
-
-
-
-
-
-
-
-
-
 
       
     } else {
