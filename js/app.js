@@ -291,3 +291,24 @@ function limpiarFiltros() {
   filtrarTabla();
 }
 
+function exportarExcel() {
+  const tabla = document.querySelector("#tablaFacturas");
+  const wb = XLSX.utils.table_to_book(tabla, { sheet: "Facturas" });
+  XLSX.writeFile(wb, "facturas.xlsx");
+}
+
+function exportarPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.text("Listado de Facturas", 14, 10);
+  doc.autoTable({
+    html: '#tablaFacturas',
+    startY: 20,
+    theme: 'striped'
+  });
+
+  doc.save("facturas.pdf");
+}
+
+
