@@ -238,7 +238,11 @@ window.addEventListener("online", function () {
 });
 
 function verOption (idMenu){
-var ubicacionActual = localStorage.getItem("ubicacion");
+
+  valorLocalStorange = localStorage.getItem("ubicacion")
+  
+var ubicacionActual = valorLocalStorange== null ? 'forma-inicio' : valorLocalStorange;
+
 localStorage.removeItem("ubicacion");
 localStorage.setItem("ubicacion",idMenu);  
 
