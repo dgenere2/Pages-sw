@@ -292,23 +292,112 @@ function limpiarFiltros() {
 }
 
 function exportarExcel() {
-  const tabla = document.querySelector("#tablaFacturas");
-  const wb = XLSX.utils.table_to_book(tabla, { sheet: "Facturas" });
+  const tabla = document.querySelector('#tablaFacturas table');
+  const wb = XLSX.utils.book_new();
+  const ws_data = [];
+
+  // Encabezado
+  ws_data.push(['N° Factura', 'Cliente', 'Fecha', 'Servicio', 'Monto']);
+
+  // Filas visibles
+  const filas = tabla.querySelectorAll('tbody tr');
+  filas.forEach(fila => {
+    if (fila.style.display !== 'none') {
+      const celdas = fila.querySelectorAll('td');
+      const filaDatos = Array.from(celdas).map(td => td.innerText);
+      ws_data.push(filaDatos);
+    }
+  });
+
+  // Agrega total
+  const total = document.getElementById("total-monto").innerText || "0.00";
+  ws_data.push(['', '', '', 'TOTAL', total]);
+
+  const ws = XLSX.utils.aoa_to_sheet(ws_data);
+  XLSX.utils.book_append_sheet(wb, ws, "Facturas");
   XLSX.writeFile(wb, "facturas.xlsx");
 }
+
 
 function exportarPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
-  doc.text("Listado de Facturas", 14, 10);
-  doc.autoTable({
-    html: '#tablaFacturas',
-    startY: 20,
-    theme: 'striped'
+  doc.text("Consulta de Facturas", 14, 15);
+
+  const tabla = document.querySelector('#tablaFacturas table');
+  if (!tabla) {
+    alert("Tabla no encontrada.");
+    return;
+  }
+
+  const head = [['N° Factura', 'Cliente', 'Fecha', 'Servicio', 'Monto']];
+  const body = [];
+
+  const filas = tabla.querySelectorAll('tbody tr');
+  filas.forEach(fila => {
+    if (fila.style.display !== 'none') {
+      const celdas = fila.querySelectorAll('td');
+      const datos = Array.from(celdas).map(td => td.innerText);
+      body.push(datos);
+    }
   });
 
-  doc.save("facturas.pdf");
+  // Agrega total solo si hay datos
+  if (body.length > 0) {
+    const total = document.getElementById("total-monto").innerText || "0.00";
+    body.push(['', '', '', 'TOTAL', total]);
+  }
+
+  doc.autoTable({
+    head: head,
+    body: body,
+    startY: 20
+  });
+
+  doc.save('facturas.pdf');
 }
+
+
+async function consultarFacturas() {
+  const url = "https://script.google.com/macros/s/AKfycby3Ir5diIy3a--V100zZMFtINTHJncpDp3C_cbyafQ4IB1Z41jK-SpRbFmkfzj36CnK/exec"; // Reemplaza con tu URL
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+       "Content-Type": "text/plain"
+    },
+    body: JSON.stringify({ accion: "consultar" }),  // puedes enviar filtros si quieres
+    redirect: "follow"
+  });
+  
+
+  const json = await res.json();
+
+  if (json.facturas) {
+    const tbody = document.querySelector("tbody");
+    tbody.innerHTML = ""; // Limpiar
+
+    let total = 0;
+
+    json.facturas.forEach(f => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td>${f.noFactura}</td>
+        <td>${f.cliente}</td>
+        <td>${f.fecha}</td>
+        <td>${f.servicio}</td>
+        <td>${parseFloat(f.monto).toFixed(2)}</td>
+      `;
+      tbody.appendChild(fila);
+      total += parseFloat(f.monto);
+    });
+
+    document.getElementById("total-monto").textContent = total.toFixed(2);
+  }
+}
+
+
+
 
 

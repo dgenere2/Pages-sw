@@ -29,7 +29,7 @@
   <nav id="sidebar">
     <ul>
       <li><a onclick="verOption('forma-inicio')"><span>🏠</span> Inicio</a></li>
-      <li><a onclick="verOption('forma-recibos')"><span>📄</span> Facturación</a></li>
+      <li><a onclick="verOption('forma-recibos'), consultarFacturas()"><span>📄</span> Facturación</a></li>
       <li><a onclick="verOption('forma-consulta')"><span>ℹ️</span> Consultas</a></li>
     </ul>
   </nav>
@@ -140,27 +140,6 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>F001-001</td>
-          <td>Juan Pérez</td>
-          <td>2025-06-04</td>
-          <td>Compra de cacao</td>
-          <td>125.50</td>
-        </tr>
-        <tr>
-          <td>F001-002</td>
-          <td>María Gómez</td>
-          <td>2025-06-03</td>
-          <td>Venta grano seco</td>
-          <td>95.00</td>
-        </tr>
-        <tr>
-          <td>F001-003</td>
-          <td>AgroExport</td>
-          <td>2025-06-02</td>
-          <td>Compra de cacao</td>
-          <td>300.00</td>
-        </tr>
       </tbody>
       <tfoot>
         <tr>
