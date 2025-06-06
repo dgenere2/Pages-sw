@@ -254,3 +254,40 @@ document.getElementById(idMenu).style.display = ''
     document.getElementById('overlay').classList.remove('active');
   
 }
+
+function filtrarTabla() {
+  const factura = document.getElementById('filtroFactura').value.toLowerCase();
+  const cliente = document.getElementById('filtroCliente').value.toLowerCase();
+  const fecha = document.getElementById('filtroFecha').value;
+  const servicio = document.getElementById('filtroServicio').value.toLowerCase();
+
+  const filas = document.querySelectorAll('#tablaFacturas tbody tr');
+  let total = 0;
+
+  filas.forEach(fila => {
+    const [colFactura, colCliente, colFecha, colServicio, colMonto] = fila.children;
+
+    const coincide =
+      colFactura.textContent.toLowerCase().includes(factura) &&
+      colCliente.textContent.toLowerCase().includes(cliente) &&
+      colFecha.textContent.includes(fecha) &&
+      colServicio.textContent.toLowerCase().includes(servicio);
+
+    fila.style.display = coincide ? '' : 'none';
+
+    if (coincide) {
+      total += parseFloat(colMonto.textContent.replace(/[^\d.-]/g, '')) || 0;
+    }
+  });
+
+  document.getElementById('totalMonto').textContent = `$${total.toFixed(2)}`;
+}
+
+function limpiarFiltros() {
+  document.getElementById('filtroFactura').value = '';
+  document.getElementById('filtroCliente').value = '';
+  document.getElementById('filtroFecha').value = '';
+  document.getElementById('filtroServicio').value = '';
+  filtrarTabla();
+}
+

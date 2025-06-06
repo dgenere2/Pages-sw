@@ -114,7 +114,16 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
     </section>
   </main>
 
-<div class="table-container">
+<div class="filtros">
+  <input type="text" id="filtroFactura" placeholder="N° Factura">
+  <input type="text" id="filtroCliente" placeholder="Cliente">
+  <input type="date" id="filtroFecha">
+  <input type="text" id="filtroServicio" placeholder="Servicio">
+  <button onclick="filtrarTabla()">🔍 Buscar</button>
+  <button onclick="limpiarFiltros()">🧹 Limpiar</button>
+</div>
+
+<div class="table-container" id="tablaFacturas">
     <table>
       <thead>
         <tr>
