@@ -241,12 +241,16 @@ function verOption (idMenu){
 
   valorLocalStorange = localStorage.getItem("ubicacion")
   
-var ubicacionActual = valorLocalStorange== null ? 'forma-inicio' : valorLocalStorange;
+var ubicacionActual = valorLocalStorange == null ? 'forma-inicio' : valorLocalStorange;
+
 
 localStorage.removeItem("ubicacion");
 localStorage.setItem("ubicacion",idMenu);  
 
 document.getElementById(ubicacionActual).style.display = 'none'
 document.getElementById(idMenu).style.display = ''
+
+    document.getElementById('sidebar').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
   
 }
