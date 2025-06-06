@@ -28,10 +28,9 @@
 
   <nav id="sidebar">
     <ul>
-      <li><a href="#"><span>🏠</span> Inicio</a></li>
-      <li><a href="#"><span>📄</span> Servicios</a></li>
-      <li><a href="#"><span>ℹ️</span> Acerca de</a></li>
-      <li><a href="#"><span>✉️</span> Contacto</a></li>
+      <li><a onclick="verOption('forma-inicio')"><span>🏠</span> Inicio</a></li>
+      <li><a onclick="verOption('forma-recibos')"><span>📄</span> Recibos</a></li>
+      <li><a onclick="verOption('forma-consulta')"><span>ℹ️</span> Consultas</a></li>
     </ul>
   </nav>
 
@@ -42,6 +41,18 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
   
   <div id="overlay"></div>
 
+  <div id="forma-inicio">
+   <main>
+    <section class="content">
+      <h2>Inicio</h2>
+      <p>Bienvenido.</p>
+    </section>
+  </main>
+
+
+  </div>
+
+  <div id="forma-recibos" style="display: none;">
   <main>
     <section class="content">
       <h2>Facturación</h2>
@@ -92,6 +103,7 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
   <hr />
   <p>Gracias por su preferencia.</p>
    <button class="btn-imprimir" onclick="imprimirRecibo()">🖨️ Imprimir</button> 
+</div>
 </div>
   <div class="g_id_signin" data-type="standard"></div>
   <script src="https://accounts.google.com/gsi/client" async defer></script>

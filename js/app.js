@@ -236,3 +236,13 @@ window.addEventListener("online", function () {
     });
   }
 });
+
+function verOption (idMenu){
+var ubicacionActual = localStorage.getItem("ubicacion");
+localStorage.removeItem("ubicacion");
+localStorage.setItem("ubicacion",idMenu);  
+
+document.getElementById(ubicacionActual).style.display = 'none'
+document.getElementById(idMenu).style.display = ''
+  
+}
