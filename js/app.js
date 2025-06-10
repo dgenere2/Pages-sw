@@ -161,7 +161,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
   const factura = {
     cliente: document.getElementById("cliente").value,
     fecha: document.getElementById("fecha").value,
-    servicio: concepto+ ' | ' +comentario,
+    servicio: concepto+ ' ' +comentario,
     monto: parseFloat(document.getElementById("monto").value).toFixed(2),
     peso: parseFloat(document.getElementById("peso").value).toFixed(2),
     usuario: emailGuardado,
@@ -211,7 +211,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
 function generarNumeroFactura() {
   const ahora = Date.now().toString().slice(-6); // Últimos 6 dígitos del timestamp
   const aleatorio = Math.floor(Math.random() * 900 + 100); // Número aleatorio de 3 cifras
-  console.log( `F-${ahora}${aleatorio}`); // Ejemplo: "456789123"
+  return `F-${ahora}${aleatorio}`; // Ejemplo: "456789123"
 }
 
   
