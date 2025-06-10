@@ -193,7 +193,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
   document.getElementById("r-fecha").textContent = factura.fecha;
   document.getElementById("r-servicio").textContent = factura.servicio;
   document.getElementById("r-monto").textContent = factura.monto;
-  document.getElementById("recibo").style.display = "block";
+  document.getElementById("flotante").style.display = "block";
   document.getElementById("r-peso").textContent =  factura.peso 
   document.getElementById("r-factura").textContent =  factura.nofactura
    document.getElementById("r-medida").textContent = " " + factura.medida
