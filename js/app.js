@@ -462,7 +462,8 @@ function filtrarTabla() {
 function limpiarFiltros() {
   document.getElementById('filtroFactura').value = '';
   document.getElementById('filtroCliente').value = '';
-  document.getElementById('filtroFecha').value = '';
+  document.getElementById('filtroFechaDesde').value = '';
+  document.getElementById('filtroFechaHasta').value = '';
   document.getElementById('filtroServicio').value = '';
   renderizarFacturas(facturasCargadas); // Mostrar todo de nuevo
 }

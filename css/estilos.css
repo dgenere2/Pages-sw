@@ -198,14 +198,42 @@ main {
 }
 
 /* Recibo */
-.recibo {
-  font-family: monospace;
-  border: 1px dashed #999;
-  padding: 1rem;
+.recibo-flotante {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: #fff;
+  padding: 1.5rem;
   max-width: 400px;
-  margin: 1rem auto;
+  width: 90%;
+  border: 2px solid #999;
+  border-radius: 8px;
+  z-index: 1000;
+  font-family: monospace;
   font-size: 1.8rem;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.cerrar-recibo {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #c00;
+}
+
+.btn-imprimir {
+  background-color: #333;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin-top: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .recibo h2 {
