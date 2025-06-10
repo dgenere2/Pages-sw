@@ -83,7 +83,7 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
   <label for="fecha">Fecha</label>
   <input type="date" class="requerido" id="fecha" required />
 
-  <label for="quintal">precio quintal</label>
+  <label for="quintal">Precio quintal</label>
   <input oninput = "calcularMonto()" class="requerido" type="number" id="quintal" step="0.01" required />
 
    <label for="peso">Peso kilo</label>
@@ -145,12 +145,11 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
 <div class="filtros">
   <input type="text" id="filtroFactura" placeholder="N° Factura">
   <input type="text" id="filtroCliente" placeholder="Cliente">
+  <input type="text" id="filtroServicio" placeholder="Concepto.">
   <label for="filtroFechaDesde">Desde</label>
-  <input type="date" id="filtroFechaDesde" placeholder="Desde">
+  <input type="date" id="filtroFechaDesde" aria-label="Desde" title="Desde">
   <label for="filtroFechaHasta">Hasta</label>
-  <input type="date" id="filtroFechaHasta" placeholder="Hasta">
-  <input type="text" id="filtroServicio" placeholder="Concepto
-  .">
+  <input type="date" id="filtroFechaHasta" aria-label="Hasta" title="Hasta">
   <button onclick="filtrarTabla()">🔍 Buscar</button>
   <button onclick="limpiarFiltros()">🧹 Limpiar</button>
 </div>
@@ -168,10 +167,10 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
           <th>N° Factura</th>
           <th>Cliente</th>
           <th>Fecha</th>
-          <th>Servicio</th>
-          <th>Cantidad</th>
-          <th>Quintal</th>
-          <th>P. Unid</th>
+          <th>Concepto</th>
+          <th>Kilos</th>
+          <th>P. Quintal</th>
+          <th>P. Kilo</th>
           <th>Monto</th>
         </tr>
       </thead>

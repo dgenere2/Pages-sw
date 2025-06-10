@@ -99,7 +99,7 @@
      var cantidad = document.getElementById("peso").value
      var precioQuintal =  document.getElementById("quintal").value
 
-    var precioUnitario  = precioQuintal / 130
+    var precioUnitario  =  parseFloat( precioQuintal / 130).toFixed(2)
     var montoTotal = precioUnitario * cantidad
 
     if (cantidad == "" || precioUnitario == ""){ return}
@@ -176,7 +176,16 @@ document.getElementById("formulario").addEventListener("submit", async function 
    document.getElementById("fecha").value = ""
    document.getElementById("servicio").value = ""
    document.getElementById("monto").value  = ""
-  document.getElementById("peso").value  = ""
+   document.getElementById("peso").value  = ""
+  document.getElementById("quintal").value = ""
+  document.getElementById("comentario").value = ""
+   document.getElementById("unitario").value = ""
+   document.getElementById("monto").value = ""
+
+   
+
+  
+  
 
 
   // Mostrar recibo
