@@ -356,6 +356,56 @@ main {
 }
 
 
+input.requerido:invalid,
+input.requerido.vacio,
+select.requerido:invalid,
+select.requerido.vacio {
+  border: 2px solid #8B0000; /* rojo vino oscuro */
+  background-color: #fcecec; /* fondo rojizo claro */
+}
+
+.menu-inicio {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.menu-inicio h1 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 0.5em;
+}
+
+.menu-inicio p {
+  margin-bottom: 1.5em;
+  color: #666;
+}
+
+.opciones-menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.opciones-menu button {
+  padding: 1rem;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  background-color: #008080;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.opciones-menu button:hover {
+  background-color: #006666;
+}
+
+
+
 
 
 

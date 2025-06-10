@@ -50,6 +50,17 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
     </section>
   </main>
 
+<div class="menu-inicio">
+  <p>Seleccione una opción para comenzar:</p>
+  <div class="opciones-menu">
+    <button onclick="verOption('forma-recibos')">🧾 Registrar Factura</button>
+    <button onclick="verOption('forma-consulta')">🔍 Consultar Facturas</button>
+    <button hidden onclick="verOption('forma-clientes')">👥 Clientes</button>
+    <button hidden onclick="verOption('forma-configuracion')">⚙️ Configuración</button>
+    <button hidden onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
+  </div>
+</div>
+
 
   </div>
 
@@ -64,21 +75,29 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
   <!-- FORMULARIO -->
 <form id="formulario" class="formulario">
   <label for="cliente">Cliente</label>
-  <input type="text" id="cliente" required />
+  <input type="text" id="cliente" class="requerido" required />
 
   <label for="fecha">Fecha</label>
-  <input type="date" id="fecha" required />
+  <input type="date" class="requerido" id="fecha" required />
 
-   <label for="peso">Peso</label>
-  <input  oninput = "calcularMonto()" type="number" id="peso" step="0.01" required />
-  <select id="medida">
+  <label for="quintal">precio quintal</label>
+  <input oninput = "calcularMonto()" class="requerido" type="number" id="quintal" step="0.01" required />
+
+   <label for="peso">Peso kilo</label>
+  <input  oninput = "calcularMonto()" class="requerido" type="number" id="peso" step="0.01" class="requerido" required />
+  <select id="medida" hidden>
   </select>
 
-  <label for="unitario">Precio unitario</label>
-  <input oninput = "calcularMonto()" type="number" id="unitario" step="0.01" required />
+  <label for="unitario">Precio kilo</label>
+  <input oninput = "calcularMonto()"  readonly type="number" id="unitario" step="0.01" required />
 
   <label for="servicio">Concepto</label>
-  <input type="text" id="servicio" required />
+    <select id="servicio" class="requerido" required >
+      <option></option>
+  </select>
+
+    <label for="comentario">Comentario o detalle (opcional)</label>
+  <textarea id="comentario" ></textarea>
 
   <label for="monto">Monto (RD$)</label>
   <input readonly type="number" id="monto" step="0.01" required />
@@ -118,11 +137,16 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
 <div class="filtros">
   <input type="text" id="filtroFactura" placeholder="N° Factura">
   <input type="text" id="filtroCliente" placeholder="Cliente">
-  <input type="date" id="filtroFecha">
-  <input type="text" id="filtroServicio" placeholder="Servicio">
+  <label for="filtroFechaDesde">Desde</label>
+  <input type="date" id="filtroFechaDesde" placeholder="Desde">
+  <label for="filtroFechaHasta">Hasta</label>
+  <input type="date" id="filtroFechaHasta" placeholder="Hasta">
+  <input type="text" id="filtroServicio" placeholder="Concepto
+  .">
   <button onclick="filtrarTabla()">🔍 Buscar</button>
   <button onclick="limpiarFiltros()">🧹 Limpiar</button>
 </div>
+
 
  <div class="exportar">
     <button onclick="exportarExcel()">📊 Exportar Excel</button>
@@ -137,6 +161,9 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
           <th>Cliente</th>
           <th>Fecha</th>
           <th>Servicio</th>
+          <th>Cantidad</th>
+          <th>Quintal</th>
+          <th>P. Unid</th>
           <th>Monto</th>
         </tr>
       </thead>
@@ -145,8 +172,9 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
       <tfoot>
         <tr>
           <td colspan="4">Total</td>
+          <td colspan="3" id="total-cant">0.00</td>
           <td id="total-monto">0.00</td>
-        </tr>
+          </tr>
       </tfoot>
     </table>
   </div>

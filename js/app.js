@@ -16,7 +16,10 @@
       if (data.status === "success") {
         localStorage.removeItem("medida")
         localStorage.setItem("medida",data.medidas)
-        var medias = data.medidas.split(',')
+        localStorage.setItem("conceptos",data.conceptos)
+        var medidas = data.medidas.split(',')
+        var conceptos = data.conceptos.split(',')
+
         localStorage.setItem("userEmail", data.email);
         localStorage.setItem("id_token", id_token);
         document.getElementById("r-negocio").textContent = data.negocio
@@ -25,8 +28,13 @@
         document.getElementById("resultado").textContent = data.email;
         document.getElementById("logout").style.display = "inline-block";
         document.getElementById("boton-login").innerHTML = ""; // Oculta login
-        for (i in medias){
-         document.getElementById("medida").add(new Option(medias[i], medias[i] ));
+        
+        for (i in medidas){
+         document.getElementById("medida").add(new Option(medidas[i], medidas[i] ));
+          }
+          
+          for (i in conceptos){
+         document.getElementById("servicio").add(new Option(conceptos[i], conceptos[i] ));
           }
 
           
@@ -57,12 +65,21 @@
       document.getElementById("resultado").textContent = emailGuardado;
       document.getElementById("logout").style.display = "inline-block";
       var datosMedidas = localStorage.getItem("medida")
-      var medias = datosMedidas.split(',')
+      var datosConceptos = localStorage.getItem("conceptos")
+
+      var medidas = datosMedidas.split(',')
+      var conceptos = datosConceptos.split(',')
 
 
-        for (i in medias){
-         document.getElementById("medida").add(new Option(medias[i], medias[i] ));
+        for (i in medidas){
+         document.getElementById("medida").add(new Option(medidas[i], medidas[i] ));
           }
+          
+          for (i in conceptos){
+         document.getElementById("medida").add(new Option(conceptos[i], conceptos[i] ));
+          }
+
+          
 
       
     } else {
@@ -79,14 +96,17 @@
   };
 
   function calcularMonto() {
-   var cantidad = document.getElementById("peso").value
-     var pricioUnitario = document.getElementById("unitario").value
-    var montoTotal = pricioUnitario * cantidad
+     var cantidad = document.getElementById("peso").value
+     var precioQuintal =  document.getElementById("quintal").value
 
-    if (cantidad == "" || pricioUnitario == ""){ return}
+    var precioUnitario  = precioQuintal / 130
+    var montoTotal = precioUnitario * cantidad
+
+    if (cantidad == "" || precioUnitario == ""){ return}
     
     
     document.getElementById("monto").value =  parseFloat(montoTotal).toFixed(2)
+    document.getElementById("unitario").value = parseFloat(precioUnitario).toFixed(2)
 
     }
   
@@ -126,25 +146,30 @@ document.getElementById("formulario").addEventListener("submit", async function 
 
   const id_token = localStorage.getItem("id_token");
   const emailGuardado = localStorage.getItem("userEmail");
-  var noFactura = getIdDinamico();
+  var noFactura = generarNumeroFactura();
   if (!id_token) {
     alert("Debe iniciar sesión para guardar la factura.");
     return;
   }
 
   console.log("Factura ID:", noFactura);
+  var concepto = document.getElementById("servicio").value
+  var comentario = document.getElementById("comentario").value
+
+   
 
   const factura = {
     cliente: document.getElementById("cliente").value,
     fecha: document.getElementById("fecha").value,
-    servicio: document.getElementById("servicio").value,
+    servicio: concepto+ ' | ' +comentario,
     monto: parseFloat(document.getElementById("monto").value).toFixed(2),
     peso: parseFloat(document.getElementById("peso").value).toFixed(2),
     usuario: emailGuardado,
     token: id_token,
     nofactura: noFactura,
     medida: document.getElementById("medida").value,
-    preciounidad: document.getElementById("unitario").value 
+    preciounidad: document.getElementById("unitario").value,
+    quintal: document.getElementById("quintal").value
   };
 
    document.getElementById("cliente").value = ""
@@ -183,10 +208,12 @@ document.getElementById("formulario").addEventListener("submit", async function 
 
 });
 
-      function getIdDinamico() {
-  return new Date().getTime() + '-' + (Math.floor(Math.random() * 100) + 1);
+function generarNumeroFactura() {
+  const ahora = Date.now().toString().slice(-6); // Últimos 6 dígitos del timestamp
+  const aleatorio = Math.floor(Math.random() * 900 + 100); // Número aleatorio de 3 cifras
+  console.log( `F-${ahora}${aleatorio}`); // Ejemplo: "456789123"
+}
 
-}   
   
 
 // Enviar a Apps Script
@@ -273,9 +300,11 @@ function exportarExcel() {
   const tabla = document.querySelector('#tablaFacturas table');
   const wb = XLSX.utils.book_new();
   const ws_data = [];
+  var timeTamp = new Date().getTime()
+  var nomDocument = 'facturas_'+ timeTamp+ '.xlsx'
 
   // Encabezado
-  ws_data.push(['N° Factura', 'Cliente', 'Fecha', 'Servicio', 'Monto']);
+  ws_data.push(['N° Factura', 'Cliente', 'Fecha', 'Servicio','Cantidad','medida','P. Unid', 'Monto']);
 
   // Filas visibles
   const filas = tabla.querySelectorAll('tbody tr');
@@ -289,17 +318,19 @@ function exportarExcel() {
 
   // Agrega total
   const total = document.getElementById("total-monto").innerText || "0.00";
-  ws_data.push(['', '', '', 'TOTAL', total]);
+  ws_data.push(['', '', '','','','', 'TOTAL', total]);
 
   const ws = XLSX.utils.aoa_to_sheet(ws_data);
   XLSX.utils.book_append_sheet(wb, ws, "Facturas");
-  XLSX.writeFile(wb, "facturas.xlsx");
+  XLSX.writeFile(wb, nomDocument);
 }
 
 
 function exportarPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
+  var timeTamp = new Date().getTime()
+  var nomDocument = 'facturas_'+ timeTamp+ '.pdf'
 
   doc.text("Consulta de Facturas", 14, 15);
 
@@ -309,7 +340,7 @@ function exportarPDF() {
     return;
   }
 
-  const head = [['N° Factura', 'Cliente', 'Fecha', 'Servicio', 'Monto']];
+  const head = [['N° Factura', 'Cliente', 'Fecha', 'Servicio','Cantidad','medida','P. Unid', 'Monto']];
   const body = [];
 
   const filas = tabla.querySelectorAll('tbody tr');
@@ -324,7 +355,7 @@ function exportarPDF() {
   // Agrega total solo si hay datos
   if (body.length > 0) {
     const total = document.getElementById("total-monto").innerText || "0.00";
-    body.push(['', '', '', 'TOTAL', total]);
+    body.push(['', '', '','','','', 'TOTAL', total]);
   }
 
   doc.autoTable({
@@ -333,7 +364,9 @@ function exportarPDF() {
     startY: 20
   });
 
-  doc.save('facturas.pdf');
+
+
+  doc.save(nomDocument);
 }
 
 let facturasCargadas = []; // Variable global para almacenar los datos
@@ -364,6 +397,7 @@ function renderizarFacturas(facturas) {
   tbody.innerHTML = "";
 
   let total = 0;
+  let totalcant = 0;
   facturas.forEach(f => {
     const fila = document.createElement("tr");
     fila.innerHTML = `
@@ -371,37 +405,49 @@ function renderizarFacturas(facturas) {
       <td>${f.cliente}</td>
       <td>${f.fecha}</td>
       <td>${f.servicio}</td>
+      <td>${parseFloat(f.peso).toFixed(2)}</td>
+      <td>${f.quintal}</td>
+      <td>${parseFloat(f.unitario).toFixed(2)}</td>
       <td>${parseFloat(f.monto).toFixed(2)}</td>
     `;
     tbody.appendChild(fila);
     total += parseFloat(f.monto);
+    totalcant += parseFloat(f.peso);
+    
   });
 
   document.getElementById("total-monto").textContent = total.toFixed(2);
+   document.getElementById("total-cant").textContent = totalcant.toFixed(2);
 }
 
 function filtrarTabla() {
   const factura = document.getElementById('filtroFactura').value.toLowerCase();
   const cliente = document.getElementById('filtroCliente').value.toLowerCase();
-  const fecha = document.getElementById('filtroFecha').value;
+  const fechaDesde = document.getElementById('filtroFechaDesde').value;
+  const fechaHasta = document.getElementById('filtroFechaHasta').value;
   const servicio = document.getElementById('filtroServicio').value.toLowerCase();
 
   const filtradas = facturasCargadas.filter(f => {
     const noFactura = (f.noFactura || "").toString().toLowerCase();
     const clienteF = (f.cliente || "").toString().toLowerCase();
-    const fechaF = (f.fecha || "").toString();
+    const fechaF = (f.fecha || "").toString(); // formato 'yyyy-mm-dd'
     const servicioF = (f.servicio || "").toString().toLowerCase();
+
+    const dentroDeRango =
+      (!fechaDesde || fechaF >= fechaDesde) &&
+      (!fechaHasta || fechaF <= fechaHasta);
 
     return (
       noFactura.includes(factura) &&
       clienteF.includes(cliente) &&
-      fechaF.includes(fecha) &&
-      servicioF.includes(servicio)
+      servicioF.includes(servicio) &&
+      dentroDeRango
     );
   });
 
   renderizarFacturas(filtradas);
 }
+
 
 
 function limpiarFiltros() {
