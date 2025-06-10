@@ -76,7 +76,7 @@
           }
           
           for (i in conceptos){
-         document.getElementById("medida").add(new Option(conceptos[i], conceptos[i] ));
+         document.getElementById("servicio").add(new Option(conceptos[i], conceptos[i] ));
           }
 
           
