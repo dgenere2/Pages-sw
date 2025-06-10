@@ -112,9 +112,10 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
     <div id="resultado"></div>
 
 <!-- RECIBO --> 
-<div id="recibo" class="recibo-flotante" style="display:none;">
-  <button class="cerrar-recibo" onclick="document.getElementById('recibo').style.display='none'">✖</button>
+<div id="flotante" class="recibo-flotante" style="display:none;">
+  <button class="cerrar-recibo" onclick="document.getElementById('flotante').style.display='none'">✖</button>
 
+  <div id="recibo" class="recibo-flotante" style="display:none;">
   <h2 id="r-negocio"></h2>
   <h5 id="r-descipcion"></h5>
   <h3 id="r-documento"></h3>
@@ -127,6 +128,7 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
   <p><strong>Monto:</strong> RD$ <span id="r-monto"></span></p>
   <hr />
   <p>Gracias por su preferencia.</p>
+  </div>
   <button class="btn-imprimir" onclick="imprimirRecibo()">🖨️ Imprimir</button>
 </div>
 
