@@ -22,6 +22,8 @@
 
         localStorage.setItem("userEmail", data.email);
         localStorage.setItem("id_token", id_token);
+        localStorage.setItem("decripcion", data.decripcion);
+        localStorage.setItem("negocio", data.negocio);
         document.getElementById("r-negocio").textContent = data.negocio
         document.getElementById("r-descipcion").textContent = data.decripcion
         document.getElementById("r-documento").textContent = data.documento
@@ -66,6 +68,12 @@
       document.getElementById("logout").style.display = "inline-block";
       var datosMedidas = localStorage.getItem("medida")
       var datosConceptos = localStorage.getItem("conceptos")
+      var decripcion = localStorage.getItem("decripcion")
+      var negocio = localStorage.getItem("negocio")
+
+
+       document.getElementById("r-negocio").textContent = negocio
+       document.getElementById("r-descipcion").textContent = decripcion
 
       var medidas = datosMedidas.split(',')
       var conceptos = datosConceptos.split(',')
@@ -152,7 +160,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
     return;
   }
 
-  console.log("Factura ID:", noFactura);
+  //console.log("Factura ID:", noFactura);
   var concepto = document.getElementById("servicio").value
   var comentario = document.getElementById("comentario").value
 
