@@ -106,6 +106,7 @@
   function calcularMonto() {
      var cantidad = document.getElementById("peso").value
      var precioQuintal =  document.getElementById("quintal").value
+     var inputMonto = document.getElementById('monto');
 
     var precioUnitario  =  parseFloat( precioQuintal / 130).toFixed(2)
     var montoTotal = precioUnitario * cantidad
@@ -113,8 +114,11 @@
     if (cantidad == "" || precioUnitario == ""){ return}
     
     
-    document.getElementById("monto").value =  parseFloat(montoTotal).toFixed(2)
+    inputMonto.value =  parseFloat(montoTotal).toFixed(2)
     document.getElementById("unitario").value = parseFloat(precioUnitario).toFixed(2)
+
+
+    formatearMoneda(inputMonto);
 
     }
   
@@ -170,7 +174,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
     cliente: document.getElementById("cliente").value,
     fecha: document.getElementById("fecha").value,
     servicio: concepto+ ' ' +comentario,
-    monto: parseFloat(document.getElementById("monto").value).toFixed(2),
+    monto: parseFloat(obtenerMontoSinFormato()).toFixed(2),
     peso: parseFloat(document.getElementById("peso").value).toFixed(2),
     usuario: emailGuardado,
     token: id_token,
@@ -478,4 +482,34 @@ function limpiarFiltros() {
 
  // Ejecutar al cargar
  consultarFacturas();
+
+
+
+ function formatearMoneda(input) {
+  let valor = input.value.replace(/[^\d.-]/g, ''); // Eliminar todo excepto números y punto
+
+  // Evitar múltiples puntos
+  let partes = valor.split('.');
+  if (partes.length > 2) {
+    valor = partes[0] + '.' + partes.slice(1).join('');
+  }
+
+  let numero = parseFloat(valor);
+  if (!isNaN(numero)) {
+    input.value = "DOP " + numero.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  } else {
+    input.value = "";
+  }
+}
+
+function obtenerMontoSinFormato() {
+  let valor = document.getElementById("monto").value;
+  let limpio = valor.replace(/[^\d.-]/g, '');
+  return parseFloat(limpio) || 0;
+}
+
+
 

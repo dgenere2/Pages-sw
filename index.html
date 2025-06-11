@@ -102,8 +102,9 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
     <label for="comentario">Comentario o detalle (opcional)</label>
   <textarea id="comentario" ></textarea>
 
-  <label for="monto">Monto (RD$)</label>
-  <input readonly type="number" id="monto" step="0.01" required />
+  <label for="monto">Monto)</label>
+  <input type="text" id="monto" placeholder="DOP 0.00" onchange="formatearMoneda(this)">
+
 
   <button type="submit">Generar Recibo</button>
 </form>
@@ -125,7 +126,7 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
     <p><strong>Peso:</strong><span id="r-peso"></span><span id="r-medida"></span></p>
     <p><strong id="r-label"></strong><strong>:</strong><span id="r-punitario"></span></p>
     <p><strong>Concepto:</strong> <span id="r-servicio"></span></p>
-    <p><strong>Monto:</strong> RD$ <span id="r-monto"></span></p>
+    <p><strong>Monto:</strong><span id="r-monto"></span></p>
     <hr />
     <p>Gracias por su preferencia.</p>
   </div>
