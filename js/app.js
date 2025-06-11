@@ -167,7 +167,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
   //console.log("Factura ID:", noFactura);
   var concepto = document.getElementById("servicio").value
   var comentario = document.getElementById("comentario").value
-
+  var MontoFormato = document.getElementById("monto").value
    
 
   const factura = {
@@ -204,7 +204,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
   document.getElementById("r-cliente").textContent = factura.cliente;
   document.getElementById("r-fecha").textContent = factura.fecha;
   document.getElementById("r-servicio").textContent = factura.servicio;
-  document.getElementById("r-monto").textContent = factura.monto;
+  document.getElementById("r-monto").textContent = MontoFormato;
   document.getElementById("flotante").style.display = "block";
   document.getElementById("r-peso").textContent =  factura.peso 
   document.getElementById("r-factura").textContent =  factura.nofactura
