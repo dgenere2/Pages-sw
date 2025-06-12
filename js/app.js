@@ -24,12 +24,18 @@
         localStorage.setItem("id_token", id_token);
         localStorage.setItem("decripcion", data.decripcion);
         localStorage.setItem("negocio", data.negocio);
+        localStorage.setItem("adm", data.adm);
         document.getElementById("r-negocio").textContent = data.negocio
         document.getElementById("r-descipcion").textContent = data.decripcion
         document.getElementById("r-documento").textContent = data.documento
         document.getElementById("resultado").textContent = data.email;
         document.getElementById("logout").style.display = "inline-block";
         document.getElementById("boton-login").innerHTML = ""; // Oculta login
+
+        if (data.adm != 'S'){
+           document.getElementById("inicio-consulta").style.display = "none";
+          
+        }
         
         for (i in medidas){
          document.getElementById("medida").add(new Option(medidas[i], medidas[i] ));
@@ -70,6 +76,13 @@
       var datosConceptos = localStorage.getItem("conceptos")
       var decripcion = localStorage.getItem("decripcion")
       var negocio = localStorage.getItem("negocio")
+      var adm = localStorage.getItem("adm")
+
+
+  if (adm != 'S'){
+           document.getElementById("inicio-consulta").style.display = "none";
+          
+        }
 
 
        document.getElementById("r-negocio").textContent = negocio

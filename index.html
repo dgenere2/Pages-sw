@@ -54,7 +54,7 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
   <p>Seleccione una opción para comenzar:</p>
   <div class="opciones-menu">
     <button onclick="verOption('forma-recibos')">🧾 Registrar Factura</button>
-    <button onclick="verOption('forma-consulta')">🔍 Consultar Facturas</button>
+    <button id="inicio-consulta" onclick="verOption('forma-consulta')">🔍 Consultar Facturas</button>
     <button hidden onclick="verOption('forma-clientes')">👥 Clientes</button>
     <button hidden onclick="verOption('forma-configuracion')">⚙️ Configuración</button>
     <button hidden onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
@@ -103,7 +103,7 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
   <textarea id="comentario" ></textarea>
 
   <label for="monto">Monto</label>
-  <input type="text" id="monto" placeholder="DOP 0.00" onchange="formatearMoneda(this)">
+  <input type="text" id="monto" placeholder="DOP 0.00" onchange="formatearMoneda(this)" readonly>
 
 
   <button type="submit">Generar Recibo</button>
