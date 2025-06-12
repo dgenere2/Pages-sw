@@ -83,8 +83,7 @@
   if (adm == 'S'){
            document.getElementById("inicio-consulta").style.display = "";
            document.getElementById("menu-consulta").style.display = "";
-          
-        }
+                  }
 
 
        document.getElementById("r-negocio").textContent = negocio
