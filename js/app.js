@@ -33,8 +33,8 @@
         document.getElementById("boton-login").innerHTML = ""; // Oculta login
 
         if (data.adm == 'S'){
-           document.getElementById("inicio-consulta").style.display = "";
-           document.getElementById("menu-consulta").style.display = "";
+           document.getElementById("inicio-consulta").style.display = "inline-block";
+           document.getElementById("menu-consulta").style.display = "inline-block";
           
         }
         
@@ -81,8 +81,8 @@
 
 
   if (adm == 'S'){
-           document.getElementById("inicio-consulta").style.display = "";
-           document.getElementById("menu-consulta").style.display = "";
+           document.getElementById("inicio-consulta").style.display = "inline-block";
+           document.getElementById("menu-consulta").style.display = "inline-block";
                   }
 
 
