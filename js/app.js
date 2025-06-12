@@ -34,6 +34,7 @@
 
         if (data.adm != 'S'){
            document.getElementById("inicio-consulta").style.display = "none";
+           document.getElementById("menu-consulta").style.display = "none";
           
         }
         
@@ -81,6 +82,7 @@
 
   if (adm != 'S'){
            document.getElementById("inicio-consulta").style.display = "none";
+           document.getElementById("menu-consulta").style.display = "none";
           
         }
 
