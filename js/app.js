@@ -32,7 +32,7 @@
         document.getElementById("logout").style.display = "inline-block";
         document.getElementById("boton-login").innerHTML = ""; // Oculta login
 
-        if (data.adm != 'S'){
+        if (data.adm == 'S'){
            document.getElementById("inicio-consulta").style.display = "";
            document.getElementById("menu-consulta").style.display = "";
           
@@ -80,7 +80,7 @@
       var adm = localStorage.getItem("adm")
 
 
-  if (adm != 'S'){
+  if (adm == 'S'){
            document.getElementById("inicio-consulta").style.display = "";
            document.getElementById("menu-consulta").style.display = "";
           
