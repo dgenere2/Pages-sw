@@ -30,7 +30,7 @@
     <ul>
       <li><a onclick="verOption('forma-inicio')"><span>🏠</span> Inicio</a></li>
       <li><a onclick="verOption('forma-recibos');"><span>📄</span> Facturación</a></li>
-      <li id="menu-consulta"><a onclick="verOption('forma-consulta')"><span>ℹ️</span> Consultas</a></li>
+      <li id="menu-consulta" style="display: none;"><a onclick="verOption('forma-consulta')"><span>ℹ️</span> Consultas</a></li>
       <li><a onclick="window.location.reload()"><span>🔄</span> Actualizar</a></li>
     </ul>
   </nav>
@@ -54,7 +54,7 @@ background: #333; color: #fff; padding: 10px 20px; border-radius: 8px; box-shado
   <p>Seleccione una opción para comenzar:</p>
   <div class="opciones-menu">
     <button onclick="verOption('forma-recibos')">🧾 Registrar Factura</button>
-    <button id="inicio-consulta" onclick="verOption('forma-consulta')">🔍 Consultar Facturas</button>
+    <button id="inicio-consulta" style="display: none;" onclick="verOption('forma-consulta')">🔍 Consultar Facturas</button>
     <button hidden onclick="verOption('forma-clientes')">👥 Clientes</button>
     <button hidden onclick="verOption('forma-configuracion')">⚙️ Configuración</button>
     <button hidden onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
