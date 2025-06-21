@@ -132,7 +132,7 @@
     document.getElementById("unitario").value = parseFloat(precioUnitario).toFixed(2)
 
 
-    formatearMoneda(inputMonto);
+    return "DOP"+formatearMoneda(inputMonto);
 
     }
   
@@ -440,7 +440,7 @@ function renderizarFacturas(facturas) {
       <td>${f.cliente}</td>
       <td>${f.fecha}</td>
       <td>${f.servicio}</td>
-      <td>${parseFloat(f.peso).toFixed(2)}</td>
+      <td>${formatearMoneda(f.peso)}</td>
       <td>${f.quintal}</td>
       <td>${parseFloat(f.unitario).toFixed(2)}</td>
       <td>${parseFloat(f.monto).toFixed(2)}</td>
@@ -510,7 +510,7 @@ function limpiarFiltros() {
 
   let numero = parseFloat(valor);
   if (!isNaN(numero)) {
-    input.value = "DOP " + numero.toLocaleString("en-US", {
+    input.value = numero.toLocaleString("en-US", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
