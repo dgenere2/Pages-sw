@@ -440,7 +440,7 @@ function renderizarFacturas(facturas) {
       <td>${f.cliente}</td>
       <td>${f.fecha}</td>
       <td>${f.servicio}</td>
-      <td>${formatearMoneda(f.peso)}</td>
+      <td>${parseFloat(f.peso).toFixed(2)}</td>
       <td>${f.quintal}</td>
       <td>${parseFloat(f.unitario).toFixed(2)}</td>
       <td>${parseFloat(f.monto).toFixed(2)}</td>
