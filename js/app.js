@@ -436,16 +436,20 @@ function renderizarFacturas(facturas) {
   const tbody = document.querySelector("#tablaFacturas tbody");
   tbody.innerHTML = "";
 
+
+
+  let total = 0;
+  let totalcant = 0;
+  facturas.forEach(f => {
+    const fila = document.createElement("tr");
+
   const montoFormateado = parseFloat(f.monto).toLocaleString("es-DO", {
   style: "currency",
   currency: "DOP",
   minimumFractionDigits: 2
 });
 
-  let total = 0;
-  let totalcant = 0;
-  facturas.forEach(f => {
-    const fila = document.createElement("tr");
+
     fila.innerHTML = `
       <td>${f.noFactura}</td>
       <td>${f.cliente}</td>
