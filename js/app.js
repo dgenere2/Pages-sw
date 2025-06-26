@@ -450,8 +450,15 @@ function renderizarFacturas(facturas) {
 });
 
  const quintalFormateado = parseFloat(f.quintal).toLocaleString("es-DO", {
-minimumFractionDigits: 2,
-  maximumFractionDigits: 2
+style: "currency",
+  currency: "DOP",
+  minimumFractionDigits: 2
+});
+
+ const unitarioFormateado = parseFloat(f.unitario).toLocaleString("es-DO", {
+style: "currency",
+  currency: "DOP",
+  minimumFractionDigits: 2
 });
 
  const cantFormateado = parseFloat(f.peso).toLocaleString("es-DO", {
