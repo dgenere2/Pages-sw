@@ -137,7 +137,7 @@
     document.getElementById("unitario").value = parseFloat(precioUnitario).toFixed(2)
 
 
-    return "DOP"+formatearMoneda(inputMonto);
+    return formatearMoneda(inputMonto);
 
     }
   
@@ -552,9 +552,10 @@ function limpiarFiltros() {
 
   let numero = parseFloat(valor);
   if (!isNaN(numero)) {
-    input.value = numero.toLocaleString("en-US", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+    input.value = numero.toLocaleString("es-DO", {
+style: "currency",
+  currency: "DOP",
+  minimumFractionDigits: 2
     });
   } else {
     input.value = "";
