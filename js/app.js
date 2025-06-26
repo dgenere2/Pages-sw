@@ -449,13 +449,17 @@ function renderizarFacturas(facturas) {
   minimumFractionDigits: 2
 });
 
+ const cantFormateado = parseFloat(f.monto).toLocaleString("es-DO", {
+minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
 
     fila.innerHTML = `
       <td>${f.noFactura}</td>
       <td>${f.cliente}</td>
       <td>${f.fecha}</td>
       <td>${f.servicio}</td>
-      <td>${parseFloat(f.peso).toFixed(2)}</td>
+      <td>${cantFormateado}</td>
       <td>${f.quintal}</td>
       <td>${parseFloat(f.unitario).toFixed(2)}</td>
       <td>${montoFormateado}</td>
@@ -473,9 +477,8 @@ function renderizarFacturas(facturas) {
 });
 
     const totalcantFormateado = parseFloat(totalcant).toLocaleString("es-DO", {
-  style: "currency",
-  currency: "",
-  minimumFractionDigits: 2
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
 });
 
   document.getElementById("total-monto").textContent = totalFormateado;
