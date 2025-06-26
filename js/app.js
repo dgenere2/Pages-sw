@@ -32,6 +32,8 @@
         document.getElementById("logout").style.display = "inline-block";
         document.getElementById("boton-login").innerHTML = ""; // Oculta login
 
+       console.log(data.adm )
+
         if (data.adm == 'S'){
            document.getElementById("inicio-consulta").style.display = "inline-block";
            document.getElementById("menu-consulta").style.display = "inline-block";
