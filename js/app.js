@@ -32,12 +32,15 @@
         document.getElementById("logout").style.display = "inline-block";
         document.getElementById("boton-login").innerHTML = ""; // Oculta login
 
-       console.log(data.adm )
 
         if (data.adm == 'S'){
            document.getElementById("inicio-consulta").style.display = "inline-block";
            document.getElementById("menu-consulta").style.display = "inline-block";
           
+        } else{
+            document.getElementById("inicio-consulta").style.display = "none";
+           document.getElementById("menu-consulta").style.display = "none";
+
         }
         
         for (i in medidas){
@@ -433,6 +436,12 @@ function renderizarFacturas(facturas) {
   const tbody = document.querySelector("#tablaFacturas tbody");
   tbody.innerHTML = "";
 
+  const montoFormateado = parseFloat(f.monto).toLocaleString("es-DO", {
+  style: "currency",
+  currency: "DOP",
+  minimumFractionDigits: 2
+});
+
   let total = 0;
   let totalcant = 0;
   facturas.forEach(f => {
@@ -445,7 +454,7 @@ function renderizarFacturas(facturas) {
       <td>${parseFloat(f.peso).toFixed(2)}</td>
       <td>${f.quintal}</td>
       <td>${parseFloat(f.unitario).toFixed(2)}</td>
-      <td>${parseFloat(f.monto).toFixed(2)}</td>
+      <td>${montoFormateado}</td>
     `;
     tbody.appendChild(fila);
     total += parseFloat(f.monto);
