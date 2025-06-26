@@ -449,7 +449,7 @@ function renderizarFacturas(facturas) {
   minimumFractionDigits: 2
 });
 
- const quintalFormateado = parseFloat(f.quintal.toLocaleString("es-DO", {
+ const quintalFormateado = parseFloat(f.quintal).toLocaleString("es-DO", {
 minimumFractionDigits: 2,
   maximumFractionDigits: 2
 });
