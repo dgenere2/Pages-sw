@@ -466,8 +466,20 @@ function renderizarFacturas(facturas) {
     
   });
 
-  document.getElementById("total-monto").textContent = total.toFixed(2);
-   document.getElementById("total-cant").textContent = totalcant.toFixed(2);
+    const totalFormateado = parseFloat(total).toLocaleString("es-DO", {
+  style: "currency",
+  currency: "DOP",
+  minimumFractionDigits: 2
+});
+
+    const totalcantFormateado = parseFloat(totalcant).toLocaleString("es-DO", {
+  style: "currency",
+  currency: "",
+  minimumFractionDigits: 2
+});
+
+  document.getElementById("total-monto").textContent = totalFormateado;
+   document.getElementById("total-cant").textContent = totalcantFormateado;
 }
 
 function filtrarTabla() {
