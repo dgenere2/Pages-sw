@@ -454,7 +454,7 @@ minimumFractionDigits: 2,
   maximumFractionDigits: 2
 });
 
- const cantFormateado = parseFloat(f.monto).toLocaleString("es-DO", {
+ const cantFormateado = parseFloat(f.peso).toLocaleString("es-DO", {
 minimumFractionDigits: 2,
   maximumFractionDigits: 2
 });
