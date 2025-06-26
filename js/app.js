@@ -473,7 +473,7 @@ minimumFractionDigits: 2,
       <td>${f.servicio}</td>
       <td>${cantFormateado}</td>
       <td>${quintalFormateado}</td>
-      <td>${parseFloat(f.unitario).toFixed(2)}</td>
+      <td>${unitarioFormateado}</td>
       <td>${montoFormateado}</td>
     `;
     tbody.appendChild(fila);
