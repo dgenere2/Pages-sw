@@ -449,6 +449,11 @@ function renderizarFacturas(facturas) {
   minimumFractionDigits: 2
 });
 
+ const quintalFormateado = parseFloat(f.quintal.toLocaleString("es-DO", {
+minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+
  const cantFormateado = parseFloat(f.monto).toLocaleString("es-DO", {
 minimumFractionDigits: 2,
   maximumFractionDigits: 2
@@ -460,7 +465,7 @@ minimumFractionDigits: 2,
       <td>${f.fecha}</td>
       <td>${f.servicio}</td>
       <td>${cantFormateado}</td>
-      <td>${f.quintal}</td>
+      <td>${quintalFormateado}</td>
       <td>${parseFloat(f.unitario).toFixed(2)}</td>
       <td>${montoFormateado}</td>
     `;
